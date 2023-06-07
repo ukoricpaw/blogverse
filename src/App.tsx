@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useEffect, useState } from 'react'
+import AppRouter from './components/Router/AppRouter'
+import { BrowserRouter } from 'react-router-dom'
+import Navbar from './components/GeneralComponents/Navbar'
+import { useAppSelector, useAppDispatch } from './hooks/reduxHooks'
+import { checkAuthThunk } from './store/action-creators/checkAuthThunk'
 
-function App() {
+const App: FC = () => {
+
+  const dispatch = useAppDispatch();
+
+  const [loadingCheck, setLoadingCheck] = useState<boolean>(true)
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(checkAuthThunk())
+      setLoadingCheck(false)
+    })()
+  }, [])
+
+  if (loadingCheck) {
+    return <main className='mainContainer'>
+      <div className='contentWrapper'>
+        <p>Загрузка</p>
+      </div>
+    </main>
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Navbar />
+      <AppRouter />
+    </BrowserRouter >
+  )
 }
 
-export default App;
+export default App

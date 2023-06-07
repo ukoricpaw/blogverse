@@ -1,0 +1,74 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 160px);
+  margin-top: 40px;
+  border: 1px solid rgb(209, 209, 209);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+
+  .formContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.25);
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      padding-top: 40px;
+      gap: 20px;
+      width: 500px;
+
+      .formItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .formLabel {
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        .formInput {
+          width: 280px;
+          font-size: 18px;
+          padding: 10px;
+          outline: none;
+          border-radius: 8px;
+          border: none;
+          background-color: rgb(224, 241, 255);
+        }
+
+      }
+
+      .submitContainer {
+        display: flex;
+        margin-top: 10px;
+        flex-direction: column;
+        gap: 20px;
+        font-size: 18px;
+
+
+        .changePageButton {
+          padding-left: 5px;
+          cursor: pointer;
+          color: rgb(61, 61, 255)
+        }
+
+        .submitBtn {
+          padding: 10px;
+          border: none;
+          font-weight: 600;
+          border-radius: 10px;
+          background-color: rgb(208, 230, 248);
+        }
+      }
+
+    }
+  }
+
+}

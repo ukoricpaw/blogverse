@@ -1,0 +1,491 @@
+@keyframes singleArticleAnim {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.embedBlock {
+  width: 100%;
+  height: 200px;
+}
+
+@mixin wordEllipsis($width) {
+  max-width: $width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+
+.imageArticleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.articleContainer {
+  width: 100%;
+  background-color: var(--white-color);
+  margin: 20px 0;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  animation: singleArticleAnim 0.6s ease-in;
+
+  .fullArticle {
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: singleArticleAnim 0.6s ease-in;
+
+    img {
+      border-radius: 20px;
+      max-height: 500px;
+      object-fit: cover;
+      box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .imageArticle {
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      font-size: 20px;
+    }
+
+    p {
+      font-weight: 500;
+    }
+
+    ol,
+    ul {
+      padding: 20px;
+    }
+
+    li {
+      padding-left: 10px;
+    }
+  }
+
+  .articleInfo {
+    background-color: var(--main-blue);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    height: 350px;
+    position: relative;
+    animation: singleArticleAnim 0.6s ease-in;
+
+    .articleMoreInfo {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .articleTitle {
+        color: var(--white-color);
+        letter-spacing: 1px;
+        font-size: 40px;
+        @include wordEllipsis(700px);
+      }
+
+      .articleTagName {
+
+        margin-top: 40px;
+        color: var(--white-color);
+        background-color: rgba(0, 0, 0, 0.25);
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    }
+
+    .articleImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      filter: brightness(55%)
+    }
+  }
+}
+
+@mixin flexContainer($sizegap) {
+  display: flex;
+  gap: $sizegap;
+  align-items: center;
+}
+
+@mixin sizeOfIcon($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+
+.articleOtherInfo {
+  background-color: var(--main-blue);
+  display: flex;
+  justify-content: space-between;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  color: var(--white-color);
+  padding: 20px 50px;
+  box-sizing: border-box;
+
+  .countInfoContainer {
+    @include flexContainer(70px);
+
+    .articleViews {
+      @include flexContainer(20px);
+
+      .articleViewsCount {
+        font-weight: 600;
+        @include wordEllipsis(50px)
+      }
+    }
+
+    .articleRateInfo {
+      @include flexContainer(30px);
+
+      .articleLikesContainer,
+      .articleDisLikesContainer {
+        @include flexContainer(20px);
+      }
+
+    }
+  }
+}
+
+.articleLikesTitle,
+.articleDisLikesTitle {
+  font-size: 22px;
+  font-weight: 700;
+  @include wordEllipsis(60px)
+}
+
+.articleLikes,
+.articleDisLikes {
+  @include sizeOfIcon(40px, 40px);
+  cursor: pointer;
+}
+
+.articleDisLikes {
+  transform: rotate(180deg)
+}
+
+.articleAvatarContainer {
+  @include flexContainer(30px);
+
+  .articleAuthorIcon {
+    @include sizeOfIcon(60px, 60px);
+    border-radius: 50%;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .articleAuthor {
+    font-size: 24px;
+    font-weight: 700;
+    @include wordEllipsis(150px)
+  }
+
+}
+
+.eyeIcon {
+  @include sizeOfIcon(40px, 40px);
+  object-fit: contain;
+}
+
+.addNewComment {
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  background-color: var(--white-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: commentAnim 0.5s ease-in;
+
+  .submitComment {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    align-self: flex-end;
+    border-radius: 15px;
+    background-color: var(--main-blue);
+    color: var(--white-color);
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+
+  .submitComment:disabled {
+    background-color: rgb(160, 163, 162);
+    cursor: default;
+  }
+
+  .textareaComment {
+    background-color: var(--white-color);
+    width: 98%;
+    min-height: 80px;
+    max-height: 300px;
+    outline: none;
+    resize: none;
+    // padding: 0 20px;
+    margin: 20px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: none;
+  }
+
+  .textareaComment::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--main-blue);
+    border-radius: 5px;
+  }
+
+  .textareaComment::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #9c9c9c;
+  }
+}
+
+
+.commentsContent {
+  margin: 30px 0;
+
+}
+
+.commentsList {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .commentsTitle {
+    font-size: 24px;
+  }
+}
+
+// CommentInfo
+.commentInfo {
+  justify-content: space-between;
+  font-size: 18px;
+  background-color: var(--main-blue);
+  color: var(--white-color);
+  padding: 15px 40px;
+  box-sizing: border-box;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.commentOtherInfo {
+  gap: 50px;
+}
+
+
+.commentInfo,
+.userInfo,
+.commentOtherInfo,
+.commentRate,
+.commentViews,
+.commentLikesRate,
+.commentLikes,
+.commentDisLikes {
+  display: flex;
+  align-items: center;
+}
+
+.commentViews {
+  gap: 10px;
+
+  .commentViewsIcon {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+  }
+
+  .commentViewsCount {
+    @include wordEllipsis(50px);
+  }
+}
+
+.userInfo {
+  gap: 15px;
+  font-weight: 500;
+}
+
+.commentRate {
+  gap: 80px;
+
+  .commentLikesRate {
+    gap: 30px;
+  }
+
+  .commentLikes,
+  .commentDisLikes {
+    gap: 8px;
+  }
+}
+
+.commentDescription {
+  background-color: var(--white-color);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 20px;
+  font-size: 18px;
+  word-wrap: break-word;
+}
+
+.commentLikesIcon {
+  cursor: pointer;
+}
+
+.commentDislikesIcon {
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.commentLikesCount,
+.commentDislikesCount {
+  @include wordEllipsis(50px);
+}
+
+.paginationList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 15px;
+
+  .next,
+  .prev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-blue);
+    color: white;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    height: 20px;
+    border-radius: 15px;
+  }
+
+  .paginationItem,
+  .paginationItemActive {
+    padding: 15px;
+    background-color: var(--main-blue);
+    color: var(--white-color);
+    font-size: 20px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
+  .paginationItemActive {
+    background-color: rgba(39, 39, 39, 0.158);
+    color: var(--dark-color)
+  }
+
+}
+
+.noComments {
+  margin: 30px 0 80px 0;
+  font-size: 24px;
+}
+
+.commentContainer {
+  animation: commentAnim 0.5s ease-in;
+}
+
+@keyframes commentAnim {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.deleteComment {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+
+  .hiddenWindow {
+    position: absolute;
+    left: 120px;
+    bottom: -15px;
+    background-color: rgb(218, 166, 166);
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+
+    .deleteMessage {
+      text-align: center;
+    }
+
+    .deleteMessageBtns {
+      display: flex;
+      gap: 15px;
+
+      .delete,
+      .cancel {
+        padding: 10px 15px;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+      }
+
+      .delete {
+        background-color: rgb(145, 56, 56)
+      }
+
+      .cancel {
+        background-color: rgb(60, 102, 156)
+      }
+
+    }
+  }
+
+  .commentDeleteIcon {
+    @include sizeOfIcon(40px, 40px);
+  }
+}
+
+.favIcon,
+.favIconActive {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}

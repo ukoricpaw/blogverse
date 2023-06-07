@@ -1,0 +1,225 @@
+%flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+%input {
+  outline: none;
+  border: none;
+  padding: 10px;
+  width: 70%;
+  border-radius: 12px;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+%button {
+  margin: 40px 0;
+  padding: 15px 20px;
+  border: none;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  cursor: pointer;
+  border-radius: 15px
+}
+
+.articleTitle {
+  @extend %flexColumn;
+  margin: 30px 0;
+
+  .articleLabel {
+    font-size: 32px;
+    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(95, 95, 95);
+    max-width: 70%;
+  }
+
+  .articleTitleInput {
+    @extend %input;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+
+}
+
+.tagContainer {
+  @extend %flexColumn;
+
+  .chooseTag {
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: 70%;
+    border-bottom: 1px solid rgb(95, 95, 95);
+  }
+
+  .tagInput {
+    @extend %input;
+  }
+}
+
+.articlePreviewContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 0;
+  gap: 15px;
+}
+
+.articlePreviwInput::-webkit-file-upload-button {
+  display: none;
+}
+
+.articlePreviwInput::before {
+  content: 'Выбрать';
+  border: none;
+  background-color: var(--dark-color);
+  padding: 8px 15px;
+  color: var(--white-color);
+  margin-right: 15px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.articlePreviwInput:hover::before,
+.addArticleButton:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+.articlePreviwInput:active::before,
+.addArticleButton:active {
+  background-color: rgb(145, 145, 145);
+}
+
+.articleTitleLabel {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.buttonContainer {
+
+  display: flex;
+  justify-content: center;
+
+  .addArticleButton {
+    @extend %button;
+    transition: all 0.5s;
+    text-align: center;
+    width: 30%;
+  }
+
+
+  .addArticleButton:disabled {
+    background-color: lightblue;
+    cursor: default;
+  }
+}
+
+.changeTypeButton {
+  display: flex;
+  gap: 15px;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0px 30px;
+  padding-top: 30px;
+
+  .changeTypeItem {
+    cursor: pointer;
+    transition: color 0.5s;
+  }
+
+  .changeTypeItem:hover {
+    color: rgb(139, 139, 139)
+  }
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 30px 50px 0;
+  background-color: #F3F3F3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  gap: 20px;
+
+  .searchWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ffffff;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.5s;
+    border: none;
+  }
+
+  .searchWrapper:disabled {
+    background-color: #bdbdbd;
+    cursor: default;
+  }
+
+  .searchWrapper:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .searchInput {
+    font-size: 18px;
+    outline: none;
+    border: none;
+    background-color: #F3F3F3;
+    width: 100%;
+  }
+
+  .searchIcon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+%tagItemProps {
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-left: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tagList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+
+  .tagItem {
+    background-color: var(--white-color);
+    @extend %tagItemProps;
+    color: rgb(161, 161, 161);
+  }
+
+  .moreTagsButton {
+    @extend %tagItemProps;
+    border: none;
+  }
+
+  .tagInput {
+    width: 85%;
+    margin-left: 30px;
+    box-sizing: border-box;
+  }
+
+  .chooseTag {
+    margin-left: 30px;
+  }
+}
+
+.noResults {
+  text-align: center;
+  padding: 20px;
+  font-weight: 600;
+}
