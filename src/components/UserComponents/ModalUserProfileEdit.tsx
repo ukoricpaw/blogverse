@@ -136,7 +136,7 @@ const ModalUserProfileEdit: FC<ModalUserProfileEditIProps> = ({ hideModalHandler
               <p className={styles.userAvatar__title}>Ваше фото:</p>
               {(!image && !deleteImg) && <UserItem width={100} height={100} data={userData} />}
               <div className={styles.changeImageContainer}>
-                <input type='file' onChange={(e) => handleFileChange(e)} accept='image/jpeg, image/png' className={styles.changePhotoButton} />
+                <input type='file' onChange={(e) => handleFileChange(e)} accept='image/jpeg, image/png, image/gif' className={styles.changePhotoButton} />
                 {(userData.fileName && !image && !deleteImg) && <button onClick={(e) => deleteImgHandler(e)} className={styles.removePhotoButton}>Удалить фото</button>}
               </div>
             </div>

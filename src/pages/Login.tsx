@@ -8,6 +8,7 @@ import { fetchUserThunk } from '../store/action-creators/fetchUserThunk'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { clearError } from '../store/reducers/userSlice'
 import { initialLoginState, initialRegState } from '../utils/LoginInputs'
+import { validationOfReg } from '../utils/ValidationOfReg'
 
 
 const Login: FC = () => {
@@ -23,6 +24,7 @@ const Login: FC = () => {
   const navigate = useNavigate();
   const [formState, setFormState] = useState<FormStateType>(initialState);
   const [disableButton, setDisableButton] = useState<boolean>(true);
+  const [validationError, setValidationError] = useState<string | null>(null)
   const refButton = useRef<HTMLButtonElement>(null);
 
 
@@ -36,6 +38,7 @@ const Login: FC = () => {
 
   const loginUser = function (e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setValidationError(null);
     dispatch(clearError());
     if (LOGIN) {
       const loginState = { ...formState };
@@ -43,6 +46,10 @@ const Login: FC = () => {
       dispatch(fetchUserThunk("login", loginState));
     }
     else {
+      const valid = validationOfReg(setValidationError, formState);
+      if (!valid) {
+        return;
+      }
       dispatch(fetchUserThunk("reg", formState));
     }
   }
@@ -51,6 +58,7 @@ const Login: FC = () => {
   useEffect(() => {
     setFormState(initialState)
     dispatch(clearError());
+    setValidationError(null);
   }, [location])
 
   useEffect(() => {
@@ -97,7 +105,7 @@ const Login: FC = () => {
               </p>
             }
             <p className={styles.loginAnswer}>
-              {isError || ""}
+              {validationError || isError || ""}
             </p>
             <button ref={refButton} disabled={disableButton} onClick={(e) => loginUser(e)} className={`${styles.submitBtn}`}>{
               LOGIN ? "Войти" : "Зарегистрироваться"

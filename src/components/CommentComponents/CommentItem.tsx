@@ -1,4 +1,4 @@
-import { FC, useState, MouseEvent } from 'react';
+import { FC, useState, useEffect, MouseEvent } from 'react';
 import { CommentInterface } from '../../types/articleTypes';
 import styles from "../../styles/SingleArticle.module.scss";
 import UserItem from '../UserComponents/UserItem';
@@ -10,6 +10,8 @@ import { deleteComment } from '../../axios/http/deleteComment';
 import { fetchCommentsThunk } from '../../store/action-creators/fetchCommentsThunk';
 import CommentLikesRate from './CommentLikesRate';
 import { Link } from 'react-router-dom';
+import { useInView } from "react-intersection-observer"
+import { viewedComment } from '../../axios/http/viewedComment';
 
 const CommentItem: FC<{ comment: CommentInterface }> = ({ comment }) => {
 
@@ -26,9 +28,21 @@ const CommentItem: FC<{ comment: CommentInterface }> = ({ comment }) => {
     });
   }
 
+  const { ref, inView } = useInView(
+    {
+      triggerOnce: true,
+      threshold: 1
+    }
+  )
+
+  useEffect(() => {
+    if (inView) {
+      viewedComment(comment.id);
+    }
+  }, [inView])
 
   return (
-    <div className={styles.commentContainer}>
+    <div ref={ref} className={styles.commentContainer}>
       <div className={styles.commentInfo}>
         <div className={styles.userInfo}>
           <Link to={`/user/${comment.user.id}`}><UserItem width={40} height={40} data={comment.user} /></Link>
