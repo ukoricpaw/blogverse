@@ -5,17 +5,20 @@ import { useParams } from 'react-router-dom'
 import { fetchSingleArticleWithSuccess, setLoadHtml, setLoading } from '../store/reducers/articleSlice'
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styles from "../styles/SingleArticle.module.scss"
+import mainStyles from "../styles/Main.module.scss"
 import draftToHtml from "draftjs-to-html"
 import ArticleOtherInfo from '../components/ArticleComponents/ArticleOtherInfo'
 import CommentsContent from '../components/CommentComponents/CommentsContent'
 import { SingleArticleInterface, SingleInfoProps } from '../types/articleTypes'
 import SingleArticleContainer from '../components/ArticleComponents/SingleArticleContainer'
+import ModalComponent from '../components/ArticleComponents/ModalComponent'
 
 const SingleArticlePage: FC = () => {
 
   let html = "";
   const { id } = useParams();
   const { currentArticle, isArticlesError, isLoadingArticles, loadHtml } = useAppSelector(state => state.ArticleReducer);
+  const { data } = useAppSelector(state => state.UserReducer)
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (!id) {
@@ -62,7 +65,6 @@ const SingleArticlePage: FC = () => {
   }
 
 
-
   return (
     <div className="mainContainer">
       <div className='contentWrapperColumn'>
@@ -71,7 +73,9 @@ const SingleArticlePage: FC = () => {
           <ArticleOtherInfo currentArticle={currentArticle} />
         </div>
         <div className={styles.articleCommentsContainer}>
-
+          <div className={mainStyles.trashEdit}>
+            {data.id === currentArticle.user.id && <ModalComponent id={currentArticle.id} title={currentArticle.title} />}
+          </div>
           <CommentsContent id={Number(id)} />
         </div>
       </div>

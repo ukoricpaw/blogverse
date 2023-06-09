@@ -16,6 +16,7 @@ export enum RouterPaths {
   USERFAVORITE = "favorites",
   ADDNEWARTICLE = "newarticle",
   REGISTRATION = "/registration",
+  EDITARTICLE = "edit/:id"
 }
 
 export type RouterType = {

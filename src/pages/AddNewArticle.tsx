@@ -2,7 +2,6 @@ import { FC, useEffect, useState, MouseEvent } from 'react'
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from 'draft-js';
 import styles from "../styles/Article.module.scss"
-import SearchTag from '../components/TagListComponents/SearchTag';
 import ArticlePreview from '../components/ArticleComponents/ArticlePreview';
 import { addNewArticle } from '../axios/http/addNewArticle';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,6 +9,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import ArticleTitle from '../components/ArticleComponents/ArticleTitle';
 import { NewArticleBody } from '../types/articleTypes';
 import { useAppSelector } from '../hooks/reduxHooks';
+import SearchTagWindow from '../components/TagListComponents/SearchTagWindow';
 
 
 const AddNewArticle: FC = () => {
@@ -46,14 +46,16 @@ const AddNewArticle: FC = () => {
     if (Number(id) !== data.id) {
       navigate(`/user/${id}`)
     }
+
   }, [])
+
 
 
   useEffect(() => {
 
     const editor = convertToRaw(editorState.getCurrentContent())
     const editorLength = editor.blocks.filter(arr => arr.text.trim() !== "");
-    if (titleState.length > 15 && titleState.length < 70 && tagId && editorLength.length > 5) {
+    if (titleState.length > 15 && titleState.length < 70 && tagId !== "null" && editorLength.length > 5) {
       setDisabled(false);
     }
     else {
@@ -63,9 +65,11 @@ const AddNewArticle: FC = () => {
 
   return (
     <form>
-      <ArticleTitle articleTitle={titleState} setArticleTitle={setTitleState} />
-      <SearchTag articleTag={tagId} setArticleTag={setTagId} />
-      <ArticlePreview setArticlePreview={setFile} />
+      <div className={styles.addArticleInfo}>
+        <ArticleTitle articleTitle={titleState} setArticleTitle={setTitleState} />
+        <SearchTagWindow page={"articleEdit"} setTag={setTagId} />
+        <ArticlePreview setArticlePreview={setFile} />
+      </div>
       <p className={styles.articleTitleLabel}>Ваша статья</p>
       <Editor
         editorStyle={{ width: "100%", background: "white", minHeight: "300px", padding: "10px 30px" }}

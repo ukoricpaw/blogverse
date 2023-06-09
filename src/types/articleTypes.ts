@@ -5,6 +5,7 @@ export interface NewArticleBody {
   description: string;
   tag_id: string;
   preview?: File;
+  delete_img?: boolean;
 }
 
 

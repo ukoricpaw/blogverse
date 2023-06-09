@@ -7,7 +7,7 @@
   outline: none;
   border: none;
   padding: 10px;
-  width: 70%;
+  width: 100%;
   border-radius: 12px;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
@@ -23,16 +23,22 @@
   border-radius: 15px
 }
 
+.editArticleTitle {
+  font-size: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid black;
+}
+
 .articleTitle {
   @extend %flexColumn;
   margin: 30px 0;
 
   .articleLabel {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 500;
     padding-bottom: 10px;
     border-bottom: 1px solid rgb(95, 95, 95);
-    max-width: 70%;
+    max-width: 100%;
   }
 
   .articleTitleInput {
@@ -46,10 +52,24 @@
 .tagContainer {
   @extend %flexColumn;
 
+  .choosedTagContainer {
+    @extend %input;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+
+    .crossIconTag {
+      width: 15px;
+      height: 15px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+
   .chooseTag {
     font-size: 18px;
     margin-bottom: 10px;
-    width: 70%;
+    max-width: 100%;
     border-bottom: 1px solid rgb(95, 95, 95);
   }
 
@@ -63,6 +83,30 @@
   flex-direction: column;
   margin: 25px 0;
   gap: 15px;
+}
+
+.articlePreviewImage {
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.buttonsPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+
+  .changeImageButton,
+  .deleteImageButton {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+  }
 }
 
 .articlePreviwInput::-webkit-file-upload-button {
@@ -102,6 +146,7 @@
 
   display: flex;
   justify-content: center;
+  gap: 20px;
 
   .addArticleButton {
     @extend %button;
@@ -190,6 +235,19 @@
   cursor: pointer;
 }
 
+
+.addArticleInfo {
+  width: 70%;
+}
+
+.tagItem {
+  background-color: var(--white-color);
+  @extend %tagItemProps;
+  color: rgb(161, 161, 161);
+  margin: auto;
+}
+
+
 .tagList {
   display: flex;
   flex-direction: column;
@@ -200,7 +258,10 @@
     background-color: var(--white-color);
     @extend %tagItemProps;
     color: rgb(161, 161, 161);
+    width: 85%;
+    box-sizing: border-box
   }
+
 
   .moreTagsButton {
     @extend %tagItemProps;

@@ -30,3 +30,15 @@ export type TokenType = {
 export type ErrType = {
   message: string;
 }
+
+
+export interface UserEditProfileInterface {
+  username?: string;
+  imgAvatar?: File;
+  delete_img?: boolean;
+}
+
+export interface UserChangePasswordInterface {
+  oldPassword: string;
+  newPassword: string;
+}

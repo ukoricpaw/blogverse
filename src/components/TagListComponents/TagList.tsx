@@ -22,7 +22,7 @@ const TagList: FC<TagListProps> = memo(({ tags }) => {
           <SlicedTagList showMore={showMore} setShowMore={setShowMore} tags={tags} />
           <button onClick={() => setSearchTagWindow(prev => !prev)} className={styles.moreTagsButton}>
             {!searchTag ? "Искать тэг" : "Скрыть"}</button>
-          {searchTag && <SearchTagWindow />}
+          {searchTag && <SearchTagWindow page={"main"} requireMessage={true} />}
         </div>
       }
     </div>

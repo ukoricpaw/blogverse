@@ -7,6 +7,8 @@ import likeIcon from "../../assets/icons/like-1386-svgrepo-com.svg"
 import dislikeIcon from "../../assets/icons/dislike.svg"
 import viewIcon from "../../assets/icons/303-3037570_eye-logo-png.png"
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import ModalComponent from './ModalComponent';
 
 interface ArticleItemProps {
   articleData: ArticleInterface;
@@ -14,6 +16,7 @@ interface ArticleItemProps {
 
 const ArticleItem: FC<ArticleItemProps> = ({ articleData }) => {
   const date = parseDate(articleData.createdAt)
+  const { data } = useAppSelector(state => state.UserReducer)
 
   return (
     <div className={styles.articleItemsContainer__Item}>
@@ -55,6 +58,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ articleData }) => {
           </div>
         </div>
       </Link>
+      {articleData.userId === data.id && <ModalComponent id={articleData.id} title={articleData.title} />}
     </div>
   )
 }

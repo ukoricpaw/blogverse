@@ -15,6 +15,11 @@ html,
 body {
   background-color: var(--lightgray-color);
   overflow-x: hidden;
+  position: relative;
+}
+
+body {
+  overflow-y: hidden;
 }
 
 

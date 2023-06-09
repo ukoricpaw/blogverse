@@ -1,5 +1,5 @@
 import { AppDispatch } from ".."
-import { fetchUser, fetchUserWithError, fetchUserWithSuccess } from "../reducers/userSlice"
+import { fetchUserWithError, fetchUserWithSuccess } from "../reducers/userSlice"
 import { $private_host } from "../../axios/config"
 import { UserStateData } from "../../types/userTypes"
 import { TokenType } from "../../types/userTypes"

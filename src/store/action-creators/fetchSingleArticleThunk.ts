@@ -1,7 +1,7 @@
 import { AppDispatch } from ".."
 import { SingleArticleInterface } from "../../types/articleTypes"
 import axios from "axios"
-import { fetchArticlesBySearch, fetchBySearchArticlesWithError, fetchSingleArticleWithError, fetchSingleArticleWithSuccess, setErrorNull } from "../reducers/articleSlice"
+import { fetchArticlesBySearch, fetchSingleArticleWithError, fetchSingleArticleWithSuccess, setErrorNull } from "../reducers/articleSlice"
 import { $private_host } from "../../axios/config"
 
 export const fetchSingleArticleThunk = (id: number) => {

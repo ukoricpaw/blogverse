@@ -49,6 +49,20 @@
       align-items: center;
       gap: 30px;
 
+      .editUserButton {
+        padding: 10px 15px;
+        color: var(--white-color);
+        border: none;
+        background-color: var(--main-blue);
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .editUserButton:hover {
+        background-color: rgb(90, 90, 134);
+      }
+
       .userProfile__infoItem {
         display: flex;
         align-items: center;
@@ -105,4 +119,136 @@
 .favoriteTitle {
   text-align: center;
   margin-bottom: 30px;
+}
+
+
+%modalButton {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+.userProfileModal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 100;
+
+  .userProfileModalWindow {
+    @extend %boxTemplate;
+    background-color: var(--white-color);
+    cursor: default;
+  }
+
+
+  .userAvatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .userAvatar__title {
+      font-size: 18px;
+    }
+
+    .changeImageContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .changePhotoButton::-webkit-file-upload-button {
+        display: none;
+      }
+
+      .changePhotoButton::before {
+        content: "Выбрать фото";
+        margin-right: 20px;
+        background-color: var(--main-blue);
+        color: var(--white-color);
+        padding: 10px 20px;
+        border-radius: 20px;
+      }
+
+      .changePhotoButton,
+      .removePhotoButton,
+      .addPhotoButton {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+    }
+
+  }
+
+  .changeOtherInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+
+    .oldPasswordContainer,
+    .newPasswordContainer {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      input {
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        background-color: var(--lightgray-color);
+        color: var(--dark-color);
+        padding: 5px;
+      }
+    }
+
+    .changePasswordButton {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .changeUsername {
+
+      .usernameLabel {
+        font-size: 16px;
+        margin-right: 15px;
+      }
+
+      .usernameInput {
+        outline: none;
+        padding: 10px;
+      }
+    }
+
+    .submitButtons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: flex-end;
+
+      button {
+        @extend %modalButton;
+        color: white;
+        background-color: var(--main-blue);
+      }
+
+      .submit:disabled {
+        cursor: default;
+        background-color: rgb(71, 129, 204);
+      }
+    }
+  }
 }
