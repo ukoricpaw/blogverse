@@ -7,7 +7,7 @@ export const unlikeComment = async (id: number, contentType: "comment" | "articl
   }
   catch (err: unknown) {
     if (axios.isAxiosError(err)) {
-      alert("Произошла ошибка")
+      return err;
     }
   }
 }

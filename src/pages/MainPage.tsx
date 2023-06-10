@@ -30,7 +30,7 @@ const MainPage: FC = () => {
 
   return (
     <div className={styles.mainContentWrapper}>
-      <Header articles={headerArticles} />
+      {headerArticles.rows.length >= 3 && <Header articles={headerArticles} />}
       <ArticlesContent typeOfArticles={"article"} />
     </div>
   )

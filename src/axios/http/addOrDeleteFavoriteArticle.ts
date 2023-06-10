@@ -17,7 +17,6 @@ export const addOrDeleteFavoriteArticle = async (articleId: number, act: typeOfA
 
   }
   catch (err) {
-    console.log(err)
-    alert("Ошибка запроса")
+    return err;
   }
 }

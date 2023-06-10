@@ -10,7 +10,7 @@ export const likeComment = async (id: number, contentType: "comment" | "article"
   }
   catch (err: unknown) {
     if (axios.isAxiosError(err)) {
-      alert("Ошибка")
+      return err;
     }
   }
 }

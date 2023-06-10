@@ -26,6 +26,7 @@ const AddNewArticle: FC = () => {
   const [tagId, setTagId] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const [disabledState, setDisabled] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleClickButton = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -38,7 +39,9 @@ const AddNewArticle: FC = () => {
     if (file) {
       body["preview"] = file;
     }
+    setLoading(true);
     await addNewArticle(body);
+    setLoading(false);
     navigate("/")
   }
 
@@ -77,9 +80,9 @@ const AddNewArticle: FC = () => {
         toolbarClassName='toolbarClassName'
         wrapperClassName='wrapperClassName'
         editorClassName='editorClassName' />
-      <div className={styles.buttonContainer}>
+      {loading ? <h2 style={{ margin: "30px 0", textAlign: "center" }}>Пожалуйста подождите...</h2> : <div className={styles.buttonContainer}>
         <button disabled={disabledState} onClick={handleClickButton} className={styles.addArticleButton}>Опубликовать</button>
-      </div>
+      </div>}
     </form>
   )
 }

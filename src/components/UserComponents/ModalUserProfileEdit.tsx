@@ -35,6 +35,8 @@ const ModalUserProfileEdit: FC<ModalUserProfileEditIProps> = ({ hideModalHandler
       (passwordBodyInitialState as UserChangePasswordInterface)
   const [passwordWindow, setPasswordWindow] = useState<boolean>(false);
   const [deleteImg, setDeleteImg] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [editProfileResponse, setEditProfileResponse] = useState<string | null>(null)
 
 
   const changeOtherInfoHandler = async (e: MouseEvent<HTMLButtonElement>) => {
@@ -48,16 +50,16 @@ const ModalUserProfileEdit: FC<ModalUserProfileEditIProps> = ({ hideModalHandler
     else if (image) {
       reqBody["imgAvatar"] = image;
     }
+    setLoading(true);
     await editProfile(reqBody)
       .then(value => {
+        setLoading(false);
         if (typeof value === "string") {
           setError(value);
           return;
         }
-        alert("Профиль был успешно изменён");
-        hideModalHandler(e);
+        setEditProfileResponse("Профиль был успешно изменён");
         dispatch(checkAuthThunk())
-        navigate("/")
       })
 
   }
@@ -111,51 +113,58 @@ const ModalUserProfileEdit: FC<ModalUserProfileEditIProps> = ({ hideModalHandler
 
 
   return (
-    <div onClick={(e) => hideModalHandler(e)} className={styles.userProfileModal}>
-      <form onClick={(e) => { e.stopPropagation() }} className={styles.userProfileModalWindow}>
-        {passwordWindow ?
-          <div className={styles.changeOtherInfo}>
-            <div className={styles.oldPasswordContainer}>
-              <label htmlFor='old'>Старый пароль: </label>
-              <input value={changePasswordBody.oldPassword}
-                onChange={(e) => setChangePasswordBody(curr => { return { ...curr, oldPassword: e.target.value } })} id='old' type='password' />
-            </div>
-            <div className={styles.newPasswordContainer}>
-              <label htmlFor='new'>Новый пароль: </label>
-              <input onChange={(e) => setChangePasswordBody(curr => { return { ...curr, newPassword: e.target.value } })} value={changePasswordBody.newPassword} id='new' type='password' />
-            </div>
-            {error && <p>{error}</p>}
-            <div className={styles.submitButtons}>
-              <button disabled={disabledPasswordButton} onClick={e => changePasswordHandler(e)} className={styles.submit}>Сохранить</button>
-              <button onClick={(e) => hidePasswordWindow(e)} className={styles.cancel}>Отмена</button>
-            </div>
-          </div>
-          :
-          <>
-            <div className={styles.userAvatar}>
-              <p className={styles.userAvatar__title}>Ваше фото:</p>
-              {(!image && !deleteImg) && <UserItem width={100} height={100} data={userData} />}
-              <div className={styles.changeImageContainer}>
-                <input type='file' onChange={(e) => handleFileChange(e)} accept='image/jpeg, image/png, image/gif' className={styles.changePhotoButton} />
-                {(userData.fileName && !image && !deleteImg) && <button onClick={(e) => deleteImgHandler(e)} className={styles.removePhotoButton}>Удалить фото</button>}
-              </div>
-            </div>
+    <div onClick={(e) => {
+      if (loading) return;
+      else if (editProfileResponse) {
+        navigate("/")
+      }
+      hideModalHandler(e)
+    }} className={styles.userProfileModal}>
+      {loading ? <p className={styles.userProfileModalWindow}>Пожалуйста подождите...</p> :
+        editProfileResponse ? <p className={styles.userProfileModalWindow}>{editProfileResponse}</p> : <form onClick={(e) => { e.stopPropagation() }} className={styles.userProfileModalWindow}>
+          {passwordWindow ?
             <div className={styles.changeOtherInfo}>
-              <div className={styles.changeUsername}>
-                <label className={styles.usernameLabel} htmlFor="username">Ваше имя:</label>
-                <input className={styles.usernameInput} id="username" type='text' value={username}
-                  onChange={e => setUsername(e.target.value)} />
-
+              <div className={styles.oldPasswordContainer}>
+                <label htmlFor='old'>Старый пароль: </label>
+                <input value={changePasswordBody.oldPassword}
+                  onChange={(e) => setChangePasswordBody(curr => { return { ...curr, oldPassword: e.target.value } })} id='old' type='password' />
+              </div>
+              <div className={styles.newPasswordContainer}>
+                <label htmlFor='new'>Новый пароль: </label>
+                <input onChange={(e) => setChangePasswordBody(curr => { return { ...curr, newPassword: e.target.value } })} value={changePasswordBody.newPassword} id='new' type='password' />
               </div>
               {error && <p>{error}</p>}
-              <button onClick={() => setPasswordWindow(true)} className={styles.changePasswordButton}>Изменить пароль</button>
               <div className={styles.submitButtons}>
-                <button onClick={(e) => changeOtherInfoHandler(e)} disabled={disabledButton} className={styles.submit}>Сохранить</button>
-                <button onClick={(e) => hideModalHandler(e)} className={styles.cancel}>Отмена</button>
+                <button disabled={disabledPasswordButton} onClick={e => changePasswordHandler(e)} className={styles.submit}>Сохранить</button>
+                <button onClick={(e) => hidePasswordWindow(e)} className={styles.cancel}>Отмена</button>
               </div>
             </div>
-          </>}
-      </form>
+            :
+            <>
+              <div className={styles.userAvatar}>
+                <p className={styles.userAvatar__title}>Ваше фото:</p>
+                {(!image && !deleteImg) && <UserItem width={100} height={100} data={userData} />}
+                <div className={styles.changeImageContainer}>
+                  <input type='file' onChange={(e) => handleFileChange(e)} accept='image/jpeg, image/png, image/gif' className={styles.changePhotoButton} />
+                  {(userData.fileName && !image && !deleteImg) && <button onClick={(e) => deleteImgHandler(e)} className={styles.removePhotoButton}>Удалить фото</button>}
+                </div>
+              </div>
+              <div className={styles.changeOtherInfo}>
+                <div className={styles.changeUsername}>
+                  <label className={styles.usernameLabel} htmlFor="username">Ваше имя:</label>
+                  <input className={styles.usernameInput} id="username" type='text' value={username}
+                    onChange={e => setUsername(e.target.value)} />
+
+                </div>
+                {(error || editProfileResponse) && <p>{error || editProfileResponse}</p>}
+                <button onClick={() => setPasswordWindow(true)} className={styles.changePasswordButton}>Изменить пароль</button>
+                <div className={styles.submitButtons}>
+                  <button onClick={(e) => changeOtherInfoHandler(e)} disabled={disabledButton} className={styles.submit}>Сохранить</button>
+                  <button onClick={(e) => hideModalHandler(e)} className={styles.cancel}>Отмена</button>
+                </div>
+              </div>
+            </>}
+        </form>}
     </div>
   )
 }

@@ -10,7 +10,7 @@ export const dislikeComment = async (id: number, contentType: "comment" | "artic
   }
   catch (err: unknown) {
     if (axios.isAxiosError(err)) {
-      alert("Ошибка")
+      return err;
     }
   }
 }
