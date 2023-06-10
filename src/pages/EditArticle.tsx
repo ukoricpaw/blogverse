@@ -61,9 +61,9 @@ const AddNewArticle: FC = () => {
     }
     (async () => {
       setLoading(true);
-      await dispatch(fetchSingleArticleThunk(Number(path[4]))).then(val => {
+      await dispatch(fetchSingleArticleThunk(Number(path[4]), true)).then(val => {
         if (val) {
-          if (val.user.id !== Number(path[2])) {
+          if (val.user.id !== Number(path[2]) && data.role !== "ADMIN") {
             navigate("/");
             return;
           }

@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react"
 import TagArticles from "../pages/TagArticles";
-import AdminPage from "../pages/AdminPage";
 import MainPage from "../pages/MainPage";
 import SingleArticlePage from "../pages/SingleArticlePage";
 import Login from "../pages/Login";
@@ -16,7 +15,8 @@ export enum RouterPaths {
   USERFAVORITE = "favorites",
   ADDNEWARTICLE = "newarticle",
   REGISTRATION = "/registration",
-  EDITARTICLE = "edit/:id"
+  EDITARTICLE = "edit/:id",
+  NOTCONFIRMED = "/notconfirmed/:id"
 }
 
 export type RouterType = {

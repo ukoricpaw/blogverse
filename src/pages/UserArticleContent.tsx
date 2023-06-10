@@ -53,7 +53,7 @@ const UserArticleContent: FC<UserArticleContentProps> = ({ id, articleType }) =>
         : isArticlesError ? <div style={{ margin: "30px 0" }}>{isArticlesError}</div>
           : data.rows && data.count === 0 && title === "" && currentTitleState === "" ?
             articleType === "favorite" ? "Нет избранных статей" : "Нет статей" :
-            data.rows.length > 0 ? <ArticlesList articles={
+            data.rows.length > 0 ? <ArticlesList notConfirmed={false} articles={
               getData
             } /> : "Статей по запросу не найдено"
       }

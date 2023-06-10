@@ -17,9 +17,9 @@ const Header: FC<HeaderProps> = memo(({ articles }) => {
             <div className={styles.lineThrough}></div>
           </div>
           <div className={styles.headerItemsContainer}>
-            <ArticleItem articleData={articles.rows[0]} />
-            <ArticleItem articleData={articles.rows[1]} />
-            <ArticleItem articleData={articles.rows[2]} />
+            <ArticleItem notConfirmed={false} articleData={articles.rows[0]} />
+            <ArticleItem notConfirmed={false} articleData={articles.rows[1]} />
+            <ArticleItem notConfirmed={false} articleData={articles.rows[2]} />
           </div>
         </header>
       </div>

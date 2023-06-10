@@ -28,7 +28,7 @@ const SingleArticlePage: FC = () => {
       top: 0,
     });
     (async () => {
-      await dispatch(fetchSingleArticleThunk(Number(id)))
+      await dispatch(fetchSingleArticleThunk(Number(id), true))
       dispatch(setLoadHtml(false));
     })()
     return () => {
@@ -61,7 +61,7 @@ const SingleArticlePage: FC = () => {
   }
 
   if (isArticlesError) {
-    return <div>{isArticlesError}</div>
+    return <div className={styles.articlesError}>{isArticlesError}</div>
   }
 
 
@@ -74,7 +74,7 @@ const SingleArticlePage: FC = () => {
         </div>
         <div className={styles.articleCommentsContainer}>
           <div className={mainStyles.trashEdit}>
-            {data.id === currentArticle.user.id && <ModalComponent id={currentArticle.id} title={currentArticle.title} />}
+            {(data.id === currentArticle.user.id || data.role === "ADMIN") && <ModalComponent id={currentArticle.id} title={currentArticle.title} />}
           </div>
           <CommentsContent id={Number(id)} />
         </div>

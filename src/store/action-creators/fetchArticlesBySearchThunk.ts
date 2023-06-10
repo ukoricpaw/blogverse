@@ -5,7 +5,7 @@ import { fetchBySearchArticlesWithError, fetchBySearchArticlesWithSuccess, setEr
 import { $private_host, $public_host } from "../../axios/config"
 
 
-type fetchType = "article" | "tag" | "user" | "favorite"
+type fetchType = "article" | "tag" | "user" | "favorite" | "notconfirmed"
 
 export const fetchArticlesBySearchThunk = (title: string, page: number,
   limit: number | null, type: ArticleType | null, fetchType: fetchType, tagId?: number) => {
@@ -17,6 +17,10 @@ export const fetchArticlesBySearchThunk = (title: string, page: number,
     let fetchingTypeArticles;
     if (fetchType === "favorite") {
       fetchingTypeArticles = "article/favorite/get"
+      host = $private_host;
+    }
+    else if (fetchType === "notconfirmed") {
+      fetchingTypeArticles = "article/notconfirmed"
       host = $private_host;
     }
     else {

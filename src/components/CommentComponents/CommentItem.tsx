@@ -56,7 +56,7 @@ const CommentItem: FC<{ comment: CommentInterface }> = ({ comment }) => {
               <p className={styles.commentViewsCount}>{comment.views}</p>
             </div>
             <CommentLikesRate comment={comment} />
-            {isAuth && data?.id === comment.userId && <div onClick={() => { setShowWindow(prev => !prev) }} className={styles.deleteComment}>
+            {isAuth && (data?.id === comment.userId || data.role === "ADMIN") && <div onClick={() => { setShowWindow(prev => !prev) }} className={styles.deleteComment}>
               <p className={styles.commentDelete}>Удалить</p>
               <img className={styles.commentDeleteIcon} src={crossIcon} title='Удалить' />
               {!showWindow && <div className={styles.hiddenWindow}>

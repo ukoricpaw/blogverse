@@ -19,11 +19,11 @@ const ArticleLikesRate: FC<{ articleData: SingleArticleInterface }> = ({ article
 
   const likeArticle = async () => {
     await rateComment("like", "article", articleData.id, articleData.user_article_likes);
-    dispatch(fetchSingleArticleThunk(articleData.id));
+    dispatch(fetchSingleArticleThunk(articleData.id, true));
   }
   const dislikeArticle = async () => {
     await rateComment("dislike", "article", articleData.id, articleData.user_article_likes)
-    dispatch(fetchSingleArticleThunk(articleData.id));
+    dispatch(fetchSingleArticleThunk(articleData.id, true));
   }
 
 

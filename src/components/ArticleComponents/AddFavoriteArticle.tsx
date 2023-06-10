@@ -17,12 +17,12 @@ const AddFavoriteArticle: FC<AddFavoriteArticleProps> = ({ articleId, favoriteAr
   const dispatch = useAppDispatch();
   const deleteFavorite = async () => {
     await addOrDeleteFavoriteArticle(articleId, "delete")
-    dispatch(fetchSingleArticleThunk(articleId));
+    dispatch(fetchSingleArticleThunk(articleId, true));
   };
 
   const addFavorite = async () => {
     await addOrDeleteFavoriteArticle(articleId, "add")
-    dispatch(fetchSingleArticleThunk(articleId));
+    dispatch(fetchSingleArticleThunk(articleId, true));
   };
   return (
     favoriteArticle.length > 0 ?

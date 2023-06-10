@@ -12,18 +12,21 @@ import ModalComponent from './ModalComponent';
 
 interface ArticleItemProps {
   articleData: ArticleInterface;
+  notConfirmed: boolean;
 }
 
-const ArticleItem: FC<ArticleItemProps> = ({ articleData }) => {
+const ArticleItem: FC<ArticleItemProps> = ({ articleData, notConfirmed }) => {
   const date = parseDate(articleData.createdAt)
   const { data } = useAppSelector(state => state.UserReducer)
+
+  const url = notConfirmed ? `/notconfirmed/${articleData.id}` : `/article/${articleData.id}`
 
   return (
     <div className={styles.articleItemsContainer__Item}>
       {articleData.article_imgs[0]?.imgName && <img className={styles.articleImg} src={`${process.env.REACT_APP_API_URL}/${articleData.article_imgs[0].imgName}`}
         title={articleData.title}
       />}
-      <Link to={`/article/${articleData.id}`}>
+      <Link to={url}>
         <div className={styles.articleInfo}>
           {articleData.tag && <>
             <button className={styles.tag_name}>{articleData.tag.name}</button>
@@ -58,7 +61,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ articleData }) => {
           </div>
         </div>
       </Link>
-      {articleData.userId === data.id && <ModalComponent id={articleData.id} title={articleData.title} />}
+      {!notConfirmed && (articleData.userId === data.id || data.role === "ADMIN") && <ModalComponent id={articleData.id} title={articleData.title} />}
     </div>
   )
 }

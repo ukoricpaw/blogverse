@@ -47,7 +47,7 @@ const ArticlesContainer: FC<ArticlesContainerProps<string>> = ({
 
       {loading ? <div>Loading...</div>
         : isArticlesError ? <div style={{ margin: "30px 0" }}>{isArticlesError}</div>
-          : data.rows.length > 0 ? <ArticlesList articles={
+          : data.rows.length > 0 ? <ArticlesList notConfirmed={false} articles={
             getData
           } /> : "Статей по запросу не найдено"
       }

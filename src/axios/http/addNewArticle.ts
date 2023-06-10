@@ -11,7 +11,7 @@ export const addNewArticle = async (body: NewArticleBody) => {
       formData.append("preview", body.preview)
     }
     await $private_host.post("api/article/add", formData)
-      .then(() => alert("Статья была добавлена"))
+      .then(() => alert("Статья будет рассмотрена модерацией"))
       .catch(err => alert("Произошла ошибка"))
   }
   catch (err: unknown) {

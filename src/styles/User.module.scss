@@ -252,3 +252,49 @@
     }
   }
 }
+
+.articlesNotConfirmedList {
+  width: 700px;
+}
+
+.adminPageContainer {
+  display: flex;
+  animation: transitionAnim 0.5s ease-in;
+
+  .articlesNotConfirmedTitle {
+    margin: 20px 0;
+  }
+
+  .addTagForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 24px;
+
+    .tagLabel {
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
+    .tagInput {
+      outline: none;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .addTagButton {
+      padding: 10px;
+      border: none;
+      color: var(--white-color);
+      cursor: pointer;
+      border-radius: 10px;
+      outline: none;
+      background-color: var(--dark-color);
+    }
+
+    .addTagButton:disabled {
+      cursor: default;
+      background-color: rgb(80, 79, 79);
+    }
+  }
+}

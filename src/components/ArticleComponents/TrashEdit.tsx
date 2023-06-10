@@ -38,10 +38,10 @@ const TrashEdit: FC<TrashEditIProps> = ({ setModalActive, setTypeModal, id }) =>
         <img onClick={deleteHandler} className={styles.trashContainer__trashIcon} src={trashIcon} />
         <p>Удалить</p>
       </div>
-      <div className={styles.editContainer}>
+      {data.role === "ADMIN" && <div className={styles.editContainer}>
         <img onClick={editHandler} className={styles.editContainer__editIcon} src={editIcon} />
         <p>Редактировать</p>
-      </div>
+      </div>}
     </div>
   )
 }
