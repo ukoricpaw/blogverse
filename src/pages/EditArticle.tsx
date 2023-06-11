@@ -33,6 +33,7 @@ const AddNewArticle: FC = () => {
   const [disabledState, setDisabled] = useState<boolean>(true)
   const [loading, setLoading] = useState<boolean>(true);
   const [deletedPreview, setDeletedPreview] = useState<boolean>(false);
+  const [loadedEditArticle, setLoadedEditArticle] = useState<boolean>(false);
 
   const handleClickButton = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -49,7 +50,9 @@ const AddNewArticle: FC = () => {
       if (file) {
         body["preview"] = file;
       }
+      setLoadedEditArticle(true);
       await updateArticle(Number(path[4]), body);
+      setLoadedEditArticle(false);
       navigate("/")
     }
   }
@@ -121,10 +124,10 @@ const AddNewArticle: FC = () => {
         toolbarClassName='toolbarClassName'
         wrapperClassName='wrapperClassName'
         editorClassName='editorClassName' />
-      <div className={styles.buttonContainer}>
+      {loadedEditArticle ? <p style={{ margin: "30px 0" }} className={styles.buttonContainer}>Пожалуйста подождите...</p> : <div className={styles.buttonContainer}>
         <button disabled={disabledState} onClick={handleClickButton} className={styles.addArticleButton}>Сохранить</button>
         <button onClick={() => navigate("/")} className={styles.addArticleButton}>Отмена</button>
-      </div>
+      </div>}
     </form>
   )
 }

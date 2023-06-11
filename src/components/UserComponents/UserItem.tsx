@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { Link } from "react-router-dom"
 import styles from "../../styles/User.module.scss"
 import defaultImage from "../../assets/imgs/default-avatar-profile.jpg"
 import { UserStateData } from '../../types/userTypes'
