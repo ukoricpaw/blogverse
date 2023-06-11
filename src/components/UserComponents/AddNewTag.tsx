@@ -12,6 +12,7 @@ const AddNewTag: FC = () => {
 
   const handleClick = async () => {
     setLoading(true);
+    setRes(null);
     await addNewTag(tag)
       .then(val => {
         setLoading(false);

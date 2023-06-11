@@ -21,7 +21,7 @@ const MainPage: FC = () => {
 
 
   if (loading) {
-    return <div>Loading..</div>
+    return <div>Загрузка..</div>
   }
 
   if (isError || headerArticles.rows.length == 0) {

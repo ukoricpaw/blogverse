@@ -91,7 +91,7 @@ const NotConfirmedArticle: FC = () => {
   }, [loadHtml])
 
   if (isLoadingArticles && !currentArticle.description) {
-    return <div>Loading...</div>
+    return <div>Загрузка...</div>
   }
 
   if (isArticlesError) {

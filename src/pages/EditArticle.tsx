@@ -96,7 +96,7 @@ const AddNewArticle: FC = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Загрузка...</div>
   }
   if (isArticlesError) {
     return <div>{isArticlesError}</div>

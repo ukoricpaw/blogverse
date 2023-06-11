@@ -1,11 +1,9 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { addOrDeleteFavoriteArticle } from '../../axios/http/addOrDeleteFavoriteArticle'
 import favoriteIcon from "../../assets/icons/favoriteIcon.png"
 import favoriteIconActive from "../../assets/icons/favoriteIconActive.png"
 import { FavoriteArticle } from '../../types/articleTypes'
 import styles from "../../styles/SingleArticle.module.scss"
-import { useAppDispatch } from '../../hooks/reduxHooks'
-import { fetchSingleArticleThunk } from '../../store/action-creators/fetchSingleArticleThunk'
 
 interface AddFavoriteArticleProps {
   articleId: number,
@@ -14,18 +12,34 @@ interface AddFavoriteArticleProps {
 
 const AddFavoriteArticle: FC<AddFavoriteArticleProps> = ({ articleId, favoriteArticle }) => {
 
-  const dispatch = useAppDispatch();
+  const favoriteArticleCondition = favoriteArticle.length > 0 ? true : false;
+
+  const [favorite, setFavorite] = useState<boolean>(favoriteArticleCondition);
+  const [disabled, setDisabled] = useState<boolean>(false);
+
   const deleteFavorite = async () => {
-    await addOrDeleteFavoriteArticle(articleId, "delete")
-    dispatch(fetchSingleArticleThunk(articleId, true));
+    if (!disabled) {
+      setDisabled(true);
+      setFavorite(false);
+      await addOrDeleteFavoriteArticle(articleId, "delete")
+      setTimeout(() => {
+        setDisabled(false);
+      }, 1000)
+    }
   };
 
   const addFavorite = async () => {
-    await addOrDeleteFavoriteArticle(articleId, "add")
-    dispatch(fetchSingleArticleThunk(articleId, true));
+    if (!disabled) {
+      setDisabled(true);
+      setFavorite(true);
+      await addOrDeleteFavoriteArticle(articleId, "add")
+      setTimeout(() => {
+        setDisabled(false);
+      }, 1000)
+    }
   };
   return (
-    favoriteArticle.length > 0 ?
+    favorite ?
       <img onClick={deleteFavorite} title={"Удалить из избранных"} className={styles.favIconActive} src={favoriteIconActive} />
       : <img onClick={addFavorite} title={"Добавить в избранное"} className={styles.favIcon} src={favoriteIcon} />
   )

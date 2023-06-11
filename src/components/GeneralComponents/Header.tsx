@@ -8,6 +8,10 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = memo(({ articles }) => {
+
+
+
+
   return (
     <div className='mainContainer'>
       <div className='contentWrapper'>

@@ -49,7 +49,7 @@ const UserArticleContent: FC<UserArticleContentProps> = ({ id, articleType }) =>
           userId={id} getFavorite={articleType === "favorite" ? true : false} />
       </> : <></>}
 
-      {loading ? <div>Loading...</div>
+      {loading ? <div>Загрузка...</div>
         : isArticlesError ? <div style={{ margin: "30px 0" }}>{isArticlesError}</div>
           : data.rows && data.count === 0 && title === "" && currentTitleState === "" ?
             articleType === "favorite" ? "Нет избранных статей" : "Нет статей" :

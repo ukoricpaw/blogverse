@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { ArticleInterface } from '../../types/articleTypes'
 import styles from "../../styles/Main.module.scss"
 import UserItem from '../UserComponents/UserItem'
@@ -19,9 +19,11 @@ const ArticleItem: FC<ArticleItemProps> = ({ articleData, notConfirmed }) => {
   const date = parseDate(articleData.createdAt)
   const { data } = useAppSelector(state => state.UserReducer)
 
+
+
   const url = notConfirmed ? `/notconfirmed/${articleData.id}` : `/article/${articleData.id}`
 
-  return (
+  return (<>
     <div className={styles.articleItemsContainer__Item}>
       {articleData.article_imgs[0]?.imgName && <img className={styles.articleImg} src={`${process.env.REACT_APP_API_URL}/${articleData.article_imgs[0].imgName}`}
         title={articleData.title}
@@ -63,6 +65,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ articleData, notConfirmed }) => {
       </Link>
       {!notConfirmed && (articleData.userId === data.id || data.role === "ADMIN") && <ModalComponent id={articleData.id} title={articleData.title} />}
     </div>
+  </>
   )
 }
 

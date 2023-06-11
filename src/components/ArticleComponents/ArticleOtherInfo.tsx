@@ -35,6 +35,7 @@ const ArticleOtherInfo: FC<ArticleOtherInfoProps> = ({ currentArticle }) => {
     }
   }, [inView])
 
+
   return (
     <div ref={ref} className={styles.articleOtherInfo}>
       <div className={styles.articleAvatarContainer}>

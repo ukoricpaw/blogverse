@@ -37,7 +37,7 @@ const UserProfile: FC = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Загрузка...</div>
   }
 
   if (err) {
