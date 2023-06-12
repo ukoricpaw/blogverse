@@ -13,9 +13,9 @@ interface UserItemProps {
 const UserItem: FC<UserItemProps> = ({ data, width, height }) => {
 
 
-  const imgAvatarCondition = data.imgAvatar ? `${process.env.REACT_APP_API_URL}/api/images/${data.imgAvatar}` : defaultImage
+  const imgAvatarCondition = data.imgAvatar ? `${process.env.REACT_APP_API_URL}api/images/${data.imgAvatar}` : defaultImage
 
-  const imgCondition = data.fileName ? `${process.env.REACT_APP_API_URL}/api/images/${data.fileName}` : imgAvatarCondition
+  const imgCondition = data.fileName ? `${process.env.REACT_APP_API_URL}api/images/${data.fileName}` : imgAvatarCondition
 
 
 

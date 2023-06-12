@@ -44,7 +44,7 @@ const CommentsContent: FC<{ id: number | undefined }> = memo(({ id }) => {
   }, [currentPage])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>Загрузка...</div>
   }
 
   if (isError) {
