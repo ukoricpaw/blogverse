@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, useRef } from 'react'
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks'
 import { fetchArticlesBySearchThunk } from '../../store/action-creators/fetchArticlesBySearchThunk'
 import mainStyles from "../../styles/Main.module.scss"
@@ -26,6 +26,8 @@ const ArticlesContent: FC<ArticlesContentProps> = ({ typeOfArticles, tagId }) =>
   const [title, setTitle] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(true);
   const [typeArticle, setType] = useState<ArticleType | null>(null);
+  const ref = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState<boolean>(false);
 
 
 
@@ -36,12 +38,30 @@ const ArticlesContent: FC<ArticlesContentProps> = ({ typeOfArticles, tagId }) =>
   }
 
   useEffect(() => {
+
     (async () => {
       setLoading(true);
       await dispatch(fetchArticlesBySearchThunk(title, currentPage, null, typeArticle, typeOfArticles, tagId))
       setLoading(false);
+      if (mounted) {
+        ref?.current?.scrollIntoView({
+          behavior: "smooth"
+        })
+      }
+      else {
+        if (typeOfArticles === "tag") {
+          ref?.current?.scrollIntoView({
+            behavior: "smooth"
+          })
+          return;
+        }
+        setMounted(true)
+      }
     })()
   }, [currentPage, tagId])
+
+
+
   useEffect(() => {
     return () => {
       dispatch(setCurrentPage(1));
@@ -52,7 +72,7 @@ const ArticlesContent: FC<ArticlesContentProps> = ({ typeOfArticles, tagId }) =>
 
 
   return (
-    <div className='articlesListContainer'>
+    <div ref={ref} className='articlesListContainer'>
       <div className='contentWrapper'>
         <TypeArticleContext.Provider value={typeArticleContext}>
           <ArticlesContainer typeArticle={typeArticle} setCurrentPage={setCurrentPage}

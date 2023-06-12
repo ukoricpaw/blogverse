@@ -1,4 +1,4 @@
-import { FC, Dispatch, SetStateAction, useMemo } from 'react';
+import { FC, Dispatch, SetStateAction, useMemo, forwardRef } from 'react';
 import mainStyles from "../../styles/Main.module.scss";
 import PopularNew from './PopularNew';
 import SearchArticle from './SearchArticle';
@@ -22,12 +22,13 @@ interface ArticlesContainerProps<T extends string> {
 }
 
 
+
 const ArticlesContainer: FC<ArticlesContainerProps<string>> = ({
   typeArticle, setType, setCurrentPage,
   loading, isArticlesError,
   data, setLoading, title, setTitle,
   currentPage
-}) => {
+}, ref) => {
 
   const getData = useMemo(() => {
     return {
@@ -56,4 +57,4 @@ const ArticlesContainer: FC<ArticlesContainerProps<string>> = ({
   )
 }
 
-export default ArticlesContainer
+export default ArticlesContainer;

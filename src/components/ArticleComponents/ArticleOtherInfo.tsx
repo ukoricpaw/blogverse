@@ -19,9 +19,9 @@ const ArticleOtherInfo: FC<ArticleOtherInfoProps> = ({ currentArticle }) => {
 
   const imageCondition =
     currentArticle.user.fileName ?
-      `${process.env.REACT_APP_API_URL}/${currentArticle.user.fileName}` :
+      `${process.env.REACT_APP_API_URL}/api/images/${currentArticle.user.fileName}` :
       currentArticle.user.imgAvatar ?
-        `${process.env.REACT_APP_API_URL}/${currentArticle.user.imgAvatar}` : defaultAvatar
+        `${process.env.REACT_APP_API_URL}/api/images/${currentArticle.user.imgAvatar}` : defaultAvatar
 
   const { ref, inView } = useInView(
     {

@@ -49,12 +49,12 @@ const ChangeProfilePassword: FC<ChangeProfilePasswordIProps> = (
     <div className={styles.changeOtherInfo}>
       <div className={styles.oldPasswordContainer}>
         <label htmlFor='old'>Старый пароль: </label>
-        <input value={changePasswordBody.oldPassword}
+        <input autoComplete='off' value={changePasswordBody.oldPassword}
           onChange={(e) => setChangePasswordBody(curr => { return { ...curr, oldPassword: e.target.value } })} id='old' type='password' />
       </div>
       <div className={styles.newPasswordContainer}>
         <label htmlFor='new'>Новый пароль: </label>
-        <input onChange={(e) => setChangePasswordBody(curr => { return { ...curr, newPassword: e.target.value } })} value={changePasswordBody.newPassword} id='new' type='password' />
+        <input autoComplete='off' onChange={(e) => setChangePasswordBody(curr => { return { ...curr, newPassword: e.target.value } })} value={changePasswordBody.newPassword} id='new' type='password' />
       </div>
       {error && <p>{error}</p>}
       <div className={styles.submitButtons}>

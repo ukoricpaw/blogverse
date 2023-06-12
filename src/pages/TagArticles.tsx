@@ -15,6 +15,10 @@ const TagArticles: FC = () => {
   const { id } = useParams()
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
     if (!tags[0]) {
       (async () => {
         const newTags = await $public_host.get<TagArticle[]>(`/api/tag?limit=15`);

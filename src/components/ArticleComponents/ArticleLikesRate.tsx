@@ -19,6 +19,7 @@ const ArticleLikesRate: FC<{ articleData: SingleArticleInterface }> = ({ article
   const [userArticleLikes, setUserArticlesLikes] = useState<boolean | null | undefined>(rateByUserCondition);
   const [disabled, setDisabled] = useState<boolean>(false);
 
+
   const likeArticle = async () => {
     if (!disabled) {
       setDisabled(true);
@@ -29,6 +30,7 @@ const ArticleLikesRate: FC<{ articleData: SingleArticleInterface }> = ({ article
     }
 
   }
+
   const dislikeArticle = async () => {
     if (!disabled) {
       setDisabled(true);
@@ -38,6 +40,7 @@ const ArticleLikesRate: FC<{ articleData: SingleArticleInterface }> = ({ article
       }, 1000)
     }
   }
+
 
   return (
     !articleData.user_article_likes ? <div className={styles.articleRateInfo}>

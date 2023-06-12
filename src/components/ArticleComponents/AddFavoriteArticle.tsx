@@ -38,6 +38,8 @@ const AddFavoriteArticle: FC<AddFavoriteArticleProps> = ({ articleId, favoriteAr
       }, 1000)
     }
   };
+
+
   return (
     favorite ?
       <img onClick={deleteFavorite} title={"Удалить из избранных"} className={styles.favIconActive} src={favoriteIconActive} />

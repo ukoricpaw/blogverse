@@ -3,6 +3,7 @@ import { UserStateData } from '../../types/userTypes'
 import styles from "../../styles/User.module.scss"
 import { useAppSelector } from '../../hooks/reduxHooks'
 import ModalUserProfileEdit from './ModalUserProfileEdit'
+import { hideBodyScroll } from '../../utils/HideBodyScroll'
 
 const UserProfileInfo: FC<{ data: UserStateData }> = ({ data }) => {
 
@@ -18,19 +19,13 @@ const UserProfileInfo: FC<{ data: UserStateData }> = ({ data }) => {
 
   const setModalActiveHandler = () => {
     setModalActive(true);
-    const html = document.querySelector('html');
-    if (html !== null) {
-      html.style.overflowY = "hidden";
-    }
+    hideBodyScroll("hide");
   }
 
 
   const hideModalHandler = (e?: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     if (e) e.preventDefault()
-    const html = document.querySelector('html');
-    if (html !== null) {
-      html.style.overflowY = "scroll";
-    }
+    hideBodyScroll("show")
     setModalActive(false);
   }
 

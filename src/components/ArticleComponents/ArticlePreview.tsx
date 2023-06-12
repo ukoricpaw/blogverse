@@ -33,7 +33,7 @@ const ArticlePreview: FC<ArticleTitleProps> = ({ setArticlePreview, articleImage
     <div className={styles.articlePreviewContainer}>
       <p className={styles.articlePreviewTitle}>Превью: </p>
       {articleImage && articleImage.length > 0 ? <>
-        {!deletedPreview && !file && <img className={styles.articlePreviewImage} src={`${process.env.REACT_APP_API_URL}/${articleImage[0].imgName}`} />}
+        {!deletedPreview && !file && <img className={styles.articlePreviewImage} src={`${process.env.REACT_APP_API_URL}/api/images/${articleImage[0].imgName}`} />}
         <div className={styles.buttonsPreview}>
           <div className={styles.articlePreviewWrapper}>
             <label htmlFor='avatar' className={styles.articlePreviwTitle} />

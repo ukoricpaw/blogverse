@@ -25,7 +25,8 @@ const ArticleItem: FC<ArticleItemProps> = ({ articleData, notConfirmed }) => {
 
   return (<>
     <div className={styles.articleItemsContainer__Item}>
-      {articleData.article_imgs[0]?.imgName && <img className={styles.articleImg} src={`${process.env.REACT_APP_API_URL}/${articleData.article_imgs[0].imgName}`}
+      {articleData.article_imgs[0]?.imgName && <img className={styles.articleImg}
+        src={`${process.env.REACT_APP_API_URL}/api/images/${articleData.article_imgs[0].imgName}`}
         title={articleData.title}
       />}
       <Link to={url}>

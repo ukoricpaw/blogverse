@@ -4,6 +4,8 @@ import { fetchArticlesThunk } from '../store/action-creators/fetchArticlesThunk'
 import Header from '../components/GeneralComponents/Header'
 import styles from "../styles/Main.module.scss"
 import ArticlesContent from '../components/ArticleComponents/ArticlesContent'
+import { hideBodyScroll } from '../utils/HideBodyScroll'
+import MainPageSkeleton from '../components/SkeletonComponents/MainPageSkeleton'
 
 
 const MainPage: FC = () => {
@@ -16,12 +18,17 @@ const MainPage: FC = () => {
     (async () => {
       await dispatch(fetchArticlesThunk())
       setLoading(false);
+      hideBodyScroll("show")
     })()
+    return () => {
+      hideBodyScroll("show")
+    }
   }, [])
 
 
   if (loading) {
-    return <div>Загрузка..</div>
+    hideBodyScroll("hide");
+    return <MainPageSkeleton />
   }
 
   if (isError || headerArticles.rows.length == 0) {

@@ -1,4 +1,4 @@
-import { FC, useEffect, useCallback } from 'react'
+import { FC, useEffect, useCallback, useRef } from 'react'
 import { fetchSingleArticleThunk } from '../store/action-creators/fetchSingleArticleThunk'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { useParams } from 'react-router-dom'
@@ -12,10 +12,12 @@ import CommentsContent from '../components/CommentComponents/CommentsContent'
 import { SingleArticleInterface, SingleInfoProps } from '../types/articleTypes'
 import SingleArticleContainer from '../components/ArticleComponents/SingleArticleContainer'
 import ModalComponent from '../components/ArticleComponents/ModalComponent'
+import SingleArticleSkeleton from '../components/SkeletonComponents/SingleArticleSkeleton'
 
 const SingleArticlePage: FC = () => {
 
   let html = "";
+  const ref = useRef<HTMLDivElement>(null)
   const { id } = useParams();
   const { currentArticle, isArticlesError, isLoadingArticles, loadHtml } = useAppSelector(state => state.ArticleReducer);
   const { data } = useAppSelector(state => state.UserReducer)
@@ -24,9 +26,11 @@ const SingleArticlePage: FC = () => {
     if (!id) {
       return;
     }
-    window.scrollTo({
-      top: 0,
-    });
+    if (ref.current) {
+      ref?.current?.scrollIntoView({
+        behavior: "smooth"
+      })
+    }
     (async () => {
       await dispatch(fetchSingleArticleThunk(Number(id), true))
       dispatch(setLoadHtml(false));
@@ -56,8 +60,9 @@ const SingleArticlePage: FC = () => {
     return {} as SingleInfoProps;
   }, [loadHtml])
 
+
   if (isLoadingArticles && !currentArticle.description) {
-    return <div>Загрузка...</div>
+    return <SingleArticleSkeleton ref={ref} />
   }
 
   if (isArticlesError) {
@@ -68,7 +73,7 @@ const SingleArticlePage: FC = () => {
   return (
     <div className="mainContainer">
       <div className='contentWrapperColumn'>
-        <div className={styles.articleContainer}>
+        <div ref={ref} className={styles.articleContainer}>
           <SingleArticleContainer func={callbackFunction} />
           <ArticleOtherInfo currentArticle={currentArticle} />
         </div>

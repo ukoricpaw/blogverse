@@ -39,6 +39,29 @@
 
 }
 
+@keyframes skeletonArticleAnim {
+  0% {
+    background-color: hsl(240, 26%, 60%);
+  }
+
+  100% {
+    background-color: hsl(240, 29%, 88%);
+  }
+}
+
+.skeletonArticleAnimContainer {
+  opacity: .7;
+  background-color: var(--main-blue);
+  height: 350px;
+  animation: skeletonArticleAnim 1s linear infinite alternate;
+}
+
+.skeletonArticleAnimSecondContainer {
+  opacity: .7;
+  background-color: var(--main-blue);
+  height: 800px;
+  animation: skeletonArticleAnim 1s linear infinite alternate;
+}
 
 .articleContainer {
   width: 100%;
@@ -46,14 +69,12 @@
   margin-bottom: 20px;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  animation: singleArticleAnim 0.6s ease-in;
 
   .fullArticle {
     margin: 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    animation: singleArticleAnim 0.6s ease-in;
 
     img {
       border-radius: 20px;

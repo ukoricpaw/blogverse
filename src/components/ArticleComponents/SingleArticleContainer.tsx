@@ -28,7 +28,7 @@ const SingleArticleContainer: FC<SingleArticleContainerProps> = memo(({ func }) 
     <>
       <div className={styles.articleInfo}>
         {info.article_imgs[0] && <img className={styles.articleImage}
-          src={`${process.env.REACT_APP_API_URL}/${info.article_imgs[0].imgName}`} />}
+          src={`${process.env.REACT_APP_API_URL}/api/images/${info.article_imgs[0].imgName}`} />}
         <div className={styles.articleMoreInfo}>
           <h1 className={styles.articleTitle}>{info.title}</h1>
           <Link to={`/tagArticles/${info.tag.id}`}>
