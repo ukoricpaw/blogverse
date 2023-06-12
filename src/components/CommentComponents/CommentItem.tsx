@@ -26,7 +26,6 @@ const CommentItem: FC<{ comment: CommentInterface }> = ({ comment }) => {
     e.stopPropagation();
     setLoadingOfDeleting(true);
     deleteComment(comment.id).then(() => {
-      setLoadingOfDeleting(false);
       dispatch(fetchCommentsThunk(comment.articleId, currentPage));
     })
       .catch(() => {
