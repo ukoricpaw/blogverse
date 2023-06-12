@@ -19,13 +19,19 @@ const CommentItem: FC<{ comment: CommentInterface }> = ({ comment }) => {
   const dispatch = useAppDispatch();
   const { data, isAuth } = useAppSelector(state => state.UserReducer)
   const { currentPage } = useAppSelector(state => state.CommentsReducer)
-  const [showWindow, setShowWindow] = useState<boolean>(true)
+  const [showWindow, setShowWindow] = useState<boolean>(true);
+  const [loadingOfDeleting, setLoadingOfDeleting] = useState<boolean>(false);
 
   const handleDeleteComment = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    await deleteComment(comment.id).then(() => {
+    setLoadingOfDeleting(true);
+    deleteComment(comment.id).then(() => {
+      setLoadingOfDeleting(false);
       dispatch(fetchCommentsThunk(comment.articleId, currentPage));
-    });
+    })
+      .catch(() => {
+        setLoadingOfDeleting(false);
+      })
   }
 
   const { ref, inView } = useInView(
@@ -56,7 +62,7 @@ const CommentItem: FC<{ comment: CommentInterface }> = ({ comment }) => {
               <p className={styles.commentViewsCount}>{comment.views}</p>
             </div>
             <CommentLikesRate comment={comment} />
-            {isAuth && (data?.id === comment.userId || data.role === "ADMIN") && <div onClick={() => { setShowWindow(prev => !prev) }} className={styles.deleteComment}>
+            {isAuth && !loadingOfDeleting && (data?.id === comment.userId || data.role === "ADMIN") && <div onClick={() => { setShowWindow(prev => !prev) }} className={styles.deleteComment}>
               <p className={styles.commentDelete}>Удалить</p>
               <img className={styles.commentDeleteIcon} src={crossIcon} title='Удалить' />
               {!showWindow && <div className={styles.hiddenWindow}>

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import { fetchArticlesThunk } from '../store/action-creators/fetchArticlesThunk'
 import Header from '../components/GeneralComponents/Header'
@@ -14,7 +14,13 @@ const MainPage: FC = () => {
   const dispatch = useAppDispatch();
   const { headerArticles, isError } = useAppSelector(state => state.ArticleReducer)
   const [loading, setLoading] = useState<boolean>(true)
+  const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView({
+        behavior: "smooth"
+      })
+    }
     (async () => {
       await dispatch(fetchArticlesThunk())
       setLoading(false);
@@ -28,7 +34,7 @@ const MainPage: FC = () => {
 
   if (loading) {
     hideBodyScroll("hide");
-    return <MainPageSkeleton />
+    return <MainPageSkeleton ref={ref} />
   }
 
   if (isError || headerArticles.rows.length == 0) {

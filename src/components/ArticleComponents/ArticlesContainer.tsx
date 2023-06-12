@@ -46,7 +46,7 @@ const ArticlesContainer: FC<ArticlesContainerProps<string>> = ({
         <SearchArticle setLoading={setLoading} title={title} setTitle={setTitle} />
       </>}
 
-      {loading ? <div>Loading...</div>
+      {loading ? <div>Пожалуйста подождите...</div>
         : isArticlesError ? <div style={{ margin: "30px 0" }}>{isArticlesError}</div>
           : data.rows.length > 0 ? <ArticlesList notConfirmed={false} articles={
             getData

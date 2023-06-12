@@ -1,10 +1,11 @@
-import { FC } from 'react'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
 import styles from "../../styles/Main.module.scss"
 import articleStyles from "../../styles/Article.module.scss"
 
-const MainPageSkeleton: FC = () => {
+
+const MainPageSkeleton: ForwardRefRenderFunction<HTMLDivElement> = (props, ref) => {
   return (
-    <div className={styles.mainContentWrapper}>
+    <div ref={ref} className={styles.mainContentWrapper}>
       <div className='mainContainer'>
         <div className='contentWrapper'>
           <header className={styles.header}>
@@ -40,4 +41,4 @@ const MainPageSkeleton: FC = () => {
   )
 }
 
-export default MainPageSkeleton
+export default forwardRef(MainPageSkeleton)

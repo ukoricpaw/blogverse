@@ -18,15 +18,21 @@ const CommentsContent: FC<{ id: number | undefined }> = memo(({ id }) => {
   const isAuth = useAppSelector(state => state.UserReducer.isAuth)
   const { isLoading, isError, comments, currentPage } = useAppSelector(state => state.CommentsReducer)
   const [description, setDescription] = useState<string>("")
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const submitComment = useCallback(async (e: MouseEvent<HTMLButtonElement>, description: string) => {
+
+
+  const submitComment = async (e: MouseEvent<HTMLButtonElement>, description: string) => {
     dispatch(setCurrentPage(currentPage === 0 ? 1 : 0))
     e.preventDefault();
+    setSubmitted(true);
+    setDescription("")
     await addNewComment({ id: Number(id), description: description }).then(value =>
       ref.current?.focus()
     );
-    setDescription("")
-  }, [description])
+    setSubmitted(false)
+  }
+
 
 
   useEffect(() => {
@@ -52,7 +58,7 @@ const CommentsContent: FC<{ id: number | undefined }> = memo(({ id }) => {
   }
   return (
     <div ref={ref} tabIndex={0} className={styles.commentsContent}>
-      {isAuth && <AddNewComment description={description} setDescription={setDescription} submitComment={submitComment} />}
+      {isAuth && <AddNewComment submitted={submitted} description={description} setDescription={setDescription} submitComment={submitComment} />}
       {comments.rows.length > 0 ? <>
         <CommentsList comments={comments} />
         <Pagination setCurrentPage={setCurrentPage} currentPage={currentPage} count={Math.ceil(comments.count / 10)} />
