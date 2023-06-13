@@ -254,11 +254,15 @@
       display: block;
       position: absolute;
       bottom: 40px;
-      left: -40px;
+      left: -100px;
       color: var(--dark-color);
       background-color: var(--white-color);
       padding: 8px;
       border-radius: 5px;
+    }
+
+    .trashContainer__trashIcon:hover+p {
+      left: -40px;
     }
   }
 }
@@ -419,4 +423,235 @@
       }
     }
   }
+}
+
+// media screen breakpoints
+
+%textOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin likesDislikesMixin($sizeOfIcon) {
+  .articleItemsContainer__Item {
+
+    .articleUserLikes {
+      width: 60%;
+
+      .likes {
+        width: #{$sizeOfIcon}px;
+        height:#{$sizeOfIcon}px;
+      }
+
+
+
+      .dislikes {
+        width: #{$sizeOfIcon}px;
+        height:#{$sizeOfIcon}px;
+      }
+
+
+
+      .viewIcon {
+        width: #{$sizeOfIcon}px !important;
+        height:#{$sizeOfIcon}px !important;
+      }
+
+    }
+  }
+}
+
+.likesRate,
+.dislikesRate,
+.viewsRate {
+  @include likesDislikesMixin(30);
+}
+
+
+@mixin headerResponsiveContainer($width, $margin, $padding, $sizeHeaderTitle, $height) {
+
+  .articlesContainer {
+    width: #{$width}px;
+
+    @if $width < 481px {
+      margin-right: 0;
+      border-right: none;
+
+
+    }
+  }
+
+  .header {
+    width: #{$width}px;
+
+    .titleContainer {
+      width: 100%;
+      margin: 0 0 #{$margin}px;
+
+      .headerTitle {
+        padding: 0 #{$padding}px;
+        font-size: #{$sizeHeaderTitle}px
+      }
+
+      .lineThrough {
+        height: #{$height}px;
+      }
+
+    }
+  }
+}
+
+@mixin articleItemsMixin($display, $header-height, $height, $max-widthoftitle, $title_font_size) {
+
+
+  .headerItemsContainer {
+    display: $display;
+    flex-direction: column;
+    margin-left: 0;
+    margin-bottom: 25px;
+    width: 100%;
+    row-gap: 18px;
+
+    @if $display ==grid {
+      grid-template-rows: #{$header-height}px #{$header-height}px;
+    }
+
+    .articleImg {
+      filter: brightness(60%);
+    }
+  }
+
+
+
+  .articleItemsContainer__Item {
+    @if $display ==flex {
+      height: #{$height}px !important;
+    }
+
+    transition: all 0.5s;
+
+    .articleTitle {
+      max-width: #{$max-widthoftitle}px !important;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: #{$title_font_size}px !important;
+    }
+  }
+}
+
+
+@mixin headerItemsContainerInfoMixin($gapInfo, $font-sizeUser, $gapUser,
+  $articleLineBetween, $max-widthName) {
+  .articleInfo {
+    gap: #{$gapInfo}px !important;
+  }
+
+
+  .articleUserInfo {
+    font-size: #{$font-sizeUser}px !important;
+    gap: #{$gapUser}px !important;
+
+    .articleUserName {
+      max-width: #{$max-widthName}px !important;
+    }
+  }
+
+  .articleLineBetween {
+    width: #{$articleLineBetween}px !important;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  @include headerResponsiveContainer(240, 10, 10, 24, 1);
+  @include articleItemsMixin(flex, 200, 200, 200, 14);
+  @include headerItemsContainerInfoMixin(10, 8, 4, 3, 30);
+  @include likesDislikesMixin(12);
+
+
+  .articleItemsContainer__Item {
+    .trashContainer__trashIcon:hover+p {
+      left: -10px !important;
+    }
+
+    .editContainer__editIcon:hover+p {
+      left: -10px !important;
+    }
+  }
+
+  .articlesList {
+    margin-right: 0;
+    gap: 20px
+  }
+
+  .tagsContainer {
+    display: none;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  @include headerResponsiveContainer(320, 10, 10, 24, 1);
+  @include articleItemsMixin(flex, 200, 240, 300, 18);
+  @include headerItemsContainerInfoMixin(14, 10, 6, 5, 60);
+  @include likesDislikesMixin(15);
+
+
+
+  .articleItemsContainer__Item {
+    .trashContainer__trashIcon:hover+p {
+      left: -10px !important;
+    }
+
+    .editContainer__editIcon:hover+p {
+      left: -10px !important;
+    }
+  }
+
+  .articlesList {
+    margin-right: 0;
+    gap: 30px
+  }
+
+  .tagsContainer {
+    display: none;
+  }
+}
+
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  @include headerResponsiveContainer(500, 10, 10, 24, 1);
+  @include articleItemsMixin(flex, 400, 240, 280, 18);
+  @include headerItemsContainerInfoMixin(18, 12, 10, 8, 60);
+  @include likesDislikesMixin(20);
+
+  .articleItemsContainer__Item {
+    .trashContainer__trashIcon:hover+p {
+      left: -10px !important;
+    }
+
+    .editContainer__editIcon:hover+p {
+      left: -10px !important;
+    }
+  }
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  @include headerResponsiveContainer(780, 10, 10, 24, 1);
+  @include articleItemsMixin(grid, 180, 240, 260, 20);
+  @include headerItemsContainerInfoMixin(18, 10, 8, 8, 25);
+  @include likesDislikesMixin(16);
+
+  .articleItemsContainer__Item {
+    .trashContainer__trashIcon:hover+p {
+      left: -10px !important;
+    }
+
+    .editContainer__editIcon:hover+p {
+      left: -10px !important;
+    }
+  }
+
 }

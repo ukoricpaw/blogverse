@@ -38,19 +38,26 @@ const Login: FC = () => {
 
   const loginUser = function (e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setDisableButton(true);
     setValidationError(null);
     dispatch(clearError());
     if (LOGIN) {
       const loginState = { ...formState };
       delete loginState["username"];
-      dispatch(fetchUserThunk("login", loginState));
+      dispatch(fetchUserThunk("login", loginState))
+        .finally(() => {
+          setDisableButton(false);
+        });
     }
     else {
       const valid = validationOfReg(setValidationError, formState);
       if (!valid) {
         return;
       }
-      dispatch(fetchUserThunk("reg", formState));
+      dispatch(fetchUserThunk("reg", formState))
+        .finally(() => {
+          setDisableButton(false);
+        });
     }
   }
 

@@ -49,16 +49,16 @@ const ArticleItem: FC<ArticleItemProps> = ({ articleData, notConfirmed }) => {
           <div className={styles.articleUserLikes}>
             <div className={styles.viewIconContainer}>
               <img className={styles.viewIcon} alt="views" src={viewIcon} />
-              <p className={styles.views}>{articleData.views}</p>
+              <p className={styles.viewsRate}>{articleData.views}</p>
             </div>
             <div className={styles.rate}>
               <div className={styles.likesContainer}>
                 <img className={styles.likes} src={likeIcon} />
-                <p>{articleData.likes}</p>
+                <p className={styles.likesRate}>{articleData.likes}</p>
               </div>
               <div className={styles.dislikesContainer}>
                 <img className={styles.dislikes} src={dislikeIcon} />
-                <p>{articleData.dislikes} </p>
+                <p className={styles.dislikesRate}>{articleData.dislikes} </p>
               </div>
             </div>
           </div>

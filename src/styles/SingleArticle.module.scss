@@ -52,7 +52,7 @@
 .skeletonArticleAnimContainer {
   opacity: .7;
   background-color: var(--main-blue);
-  height: 350px;
+  height: 350 px;
   animation: skeletonArticleAnim 1s linear infinite alternate;
 }
 
@@ -206,7 +206,6 @@
       .articleDisLikesContainer {
         @include flexContainer(20px);
         transition: all 0.14s;
-        width: 80px;
       }
 
 
@@ -570,4 +569,190 @@
   .deleteNotConfirmedArticle {
     background-color: rgb(180, 43, 43);
   }
+}
+
+@mixin paginationMixin($marginY, $gapList, $paddingNextPrev, $fontsizeNextPrev, $heightNextPrev, $brNextPrev,
+  $paddingItem, $fontSizeItem, $brItem) {
+  .paginationList {
+    margin: #{$marginY}px 0;
+    gap: #{$gapList}px;
+
+    .next,
+    .prev {
+      padding: #{$paddingNextPrev}px;
+      font-size: #{$fontsizeNextPrev}px;
+      height: #{$heightNextPrev}px;
+      border-radius: #{$brNextPrev}px;
+    }
+
+    .paginationItem,
+    .paginationItemActive {
+      padding: #{$paddingItem}px;
+      font-size: #{$fontSizeItem}px;
+      border-radius: #{$brItem}px;
+    }
+  }
+}
+
+@mixin singleArticlePreview($height, $max-widthTitle, $font-sizeTitle, $font-sizeTag, $marginTopTag, $font-sizeFullArticle,
+  $marginFullArticle, $imgBr, $imgHeight) {
+  .articleInfo {
+    height: #{$height}px !important;
+
+    .articleTitle {
+      font-size: #{$font-sizeTitle}px !important;
+      max-width: #{$max-widthTitle}px !important;
+    }
+
+    .articleTagName {
+
+      margin-top: #{$marginTopTag}px !important;
+      font-size: #{$font-sizeTag}px !important;
+    }
+  }
+
+  .articleContainer {
+
+    .fullArticle {
+      font-size: #{$font-sizeFullArticle}px !important;
+    }
+
+    .fullArticle {
+      margin: #{$marginFullArticle}px !important;
+
+      img {
+        border-radius: #{$imgBr}px !important;
+        height: #{$imgHeight}px !important;
+      }
+
+    }
+  }
+}
+
+@mixin articleOtherIconsAndRateMixin($gapCountInfo, $gapRateInfo, $gapContainer,
+  $sizeOfIcons, $maxWidth, $font-size) {
+  .articleOtherInfo {
+    .countInfoContainer {
+      gap:#{$gapCountInfo}px !important;
+
+      .articleRateInfo {
+        gap: #{$gapRateInfo}px !important;
+
+        .articleLikesContainer,
+        .articleDisLikesContainer {
+          gap: #{$gapContainer}px !important;
+
+          .articleLikes,
+          .articleDisLikes {
+            width: #{$sizeOfIcons}px !important;
+            height: #{$sizeOfIcons}px !important;
+
+          }
+
+          .articleLikesTitle,
+          .articleDisLikesTitle {
+            max-width: #{$maxWidth}px !important;
+            font-size: #{$font-size}px !important;
+          }
+        }
+      }
+
+      .articleViews {
+        gap: #{$gapContainer}px !important;
+
+        .eyeIcon {
+          width: #{$sizeOfIcons}px !important;
+          height: #{$sizeOfIcons}px !important;
+        }
+
+        .articleViewsCount {
+          max-width: #{$maxWidth}px !important;
+          font-size: #{$font-size}px !important;
+        }
+      }
+
+    }
+  }
+
+}
+
+@mixin articleOtherInfoMixin($paddingY, $paddingX, $infoGap, $maxWidthOfAuthor, $avatarFontSize, $sizeOfIcon, $gapAvatarContainer) {
+  .articleOtherInfo {
+    padding: #{$paddingY}px #{$paddingX}px !important;
+    gap: #{$infoGap}px !important;
+
+    .favIcon,
+    .favIconActive {
+      width: #{$sizeOfIcon}px !important;
+      height: #{$sizeOfIcon}px !important;
+    }
+  }
+
+  .articleAvatarContainer,
+  .articleAuthor {
+
+    .articleAuthor,
+    .authorTitle {
+      font-size: #{$avatarFontSize}px !important;
+    }
+
+    .articleAuthor {
+      max-width: #{$maxWidthOfAuthor}px
+    }
+
+    gap: #{$gapAvatarContainer}px;
+
+    .articleAuthorIcon {
+      width: #{$sizeOfIcon}px !important;
+      height: #{$sizeOfIcon}px !important;
+    }
+  }
+}
+
+@mixin addCommentSingleArticleMixin($paddingField, $textAreaFontSize, $textAreaMarginY,
+  $submitCommentFontSize, $submitCommentPadding) {
+  .addNewComment {
+    padding: #{$paddingField}px !important;
+
+    .textareaComment {
+      font-size: #{$textAreaFontSize}px !important;
+      margin: #{$textAreaMarginY}px 0 !important;
+    }
+
+    .submitComment {
+      padding: #{$submitCommentPadding}px !important;
+      font-size: #{$submitCommentFontSize}px !important;
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 319px) {
+  @include paginationMixin(6, 5, 5, 10, 10, 10, 8, 10, 10);
+  @include singleArticlePreview(250, 200, 20, 12, 25, 24, 20, 10, 150);
+  @include articleOtherInfoMixin(8, 2, 2, 45, 12, 25, 8);
+  @include articleOtherIconsAndRateMixin(4, 2, 4, 12, 12, 12);
+  @include addCommentSingleArticleMixin(10, 12, 10, 11, 12);
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  @include paginationMixin(6, 10, 8, 12, 10, 10, 10, 12, 10);
+  @include singleArticlePreview(280, 250, 24, 12, 25, 12, 20, 10, 200);
+  @include articleOtherInfoMixin(10, 10, 10, 45, 12, 30, 12);
+  @include articleOtherIconsAndRateMixin(10, 15, 4, 16, 15, 14);
+  @include addCommentSingleArticleMixin(10, 14, 10, 11, 14);
+}
+
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  @include paginationMixin(6, 12, 10, 12, 10, 10, 12, 12, 10);
+  @include singleArticlePreview(300, 400, 30, 14, 30, 12, 20, 20, 300);
+  @include articleOtherInfoMixin(15, 30, 20, 65, 15, 30, 15);
+  @include articleOtherIconsAndRateMixin(20, 15, 10, 20, 35, 16);
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  @include articleOtherInfoMixin(20, 40, 20, 150, 20, 40, 20);
+  @include articleOtherIconsAndRateMixin(30, 20, 10, 30, 40, 20);
 }

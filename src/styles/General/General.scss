@@ -60,6 +60,7 @@ $lightgreen-color: rgb(59, 190, 59);
   width: 1200px;
   display: flex;
   justify-content: center;
+
 }
 
 .contentWrapperColumn {
@@ -87,6 +88,7 @@ $lightgreen-color: rgb(59, 190, 59);
 }
 
 .articlesListContainer {
+  flex: 1 1 auto;
   background: #FBFBFB center center;
   display: flex;
   justify-content: center;
@@ -132,4 +134,69 @@ footer {
   margin-top: 40px;
   transition: all 0.15s;
   animation: footerAnim 3s ease-in
+}
+
+// media screen breakpoints
+
+@mixin footerMixin($sizeOfIcon, $fontSizetext) {
+
+  .footerWrapper {
+    .footerIcon {
+      width: #{$sizeOfIcon}px;
+      height: #{$sizeOfIcon}px;
+    }
+
+    .footerInnerText {
+      font-size: #{$fontSizetext}px;
+    }
+  }
+}
+
+@media screen and (max-width: 319px) {
+
+  .mainArticlesContainer {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  @include footerMixin(35, 10);
+
+  .contentWrapperColumn,
+  .contentWrapper,
+  .footerWrapper {
+    width: 240px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .mainArticlesContainer {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .contentWrapperColumn,
+  .contentWrapper,
+  .footerWrapper {
+    width: 320px;
+  }
+
+  @include footerMixin(40, 14);
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+  .contentWrapperColumn,
+  .contentWrapper,
+  .footerWrapper {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+  .contentWrapperColumn,
+  .contentWrapper,
+  .footerWrapper {
+    width: 780px;
+  }
 }

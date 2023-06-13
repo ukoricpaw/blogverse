@@ -55,3 +55,50 @@
   }
 
 }
+
+// media screen breakpoints
+
+@mixin navBarContainer($width, $gap, $font-size, $displayItems) {
+  .navBarContainer {
+    .navBarWrapper {
+      gap: $gap;
+      width: $width;
+
+      .navItems {
+        gap: $gap;
+
+
+        .exitItem,
+        .favoriteItem {
+          display: $displayItems;
+        }
+
+        .navItem {
+          font-size: $font-size;
+        }
+
+      }
+    }
+
+
+    .logoWrapper {
+      font-size: $font-size;
+    }
+  }
+}
+
+@media screen and (max-width: 319px) {
+  @include navBarContainer(240px, 8px, 10px, none)
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  @include navBarContainer(320px, 8px, 14px, none)
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  @include navBarContainer(520px, 15px, 14px, block)
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  @include navBarContainer(780px, 20px, 14px, block)
+}

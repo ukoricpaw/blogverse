@@ -29,11 +29,7 @@ const TagArticles: FC = () => {
 
 
   return (
-    <div className="mainContainer">
-      <div className='contentWrapperColumn'>
-        <ArticlesContent typeOfArticles={"tag"} tagId={Number(id)} />
-      </div>
-    </div>
+    <ArticlesContent typeOfArticles={"tag"} tagId={Number(id)} />
   )
 }
 

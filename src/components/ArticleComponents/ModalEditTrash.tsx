@@ -18,9 +18,9 @@ const ModalEditTrash: FC<ModalEditTrashIProps> = ({ typeModal, setModalActive, t
 
 
   const handlerModalFalse = () => {
-    const html = document.querySelector('html');
-    if (html !== null) {
-      html.style.overflowY = "scroll"
+    const body = document.querySelector('body');
+    if (body !== null) {
+      body.style.overflowY = "scroll"
     }
     setModalActive(false);
     if (response) {

@@ -6,6 +6,7 @@ import { searchTagReq } from '../../axios/http/searchTag'
 import styles from '../../styles/Article.module.scss'
 import { tagWindowContext } from '../../utils/TagWindowContext'
 import { tagWindowContextInterface } from '../../utils/TagWindowContext'
+import useDebounce from '../../hooks/useDebounce'
 
 
 interface SearchTagWindowIProps {
@@ -23,6 +24,8 @@ const SearchTagWindow: FC<SearchTagWindowIProps> = ({ requireMessage, page, setT
   const [choosedTag, setChoosedTag] = useState<string | null>(null);
   const [tagId, setTagId] = useState<number | null>(null);
 
+  const debouncedTitleTag = useDebounce({ value: title, ms: 500 });
+
   useEffect(() => {
     if (choosed && tag) {
       setChoosedTag(choosed);
@@ -35,11 +38,13 @@ const SearchTagWindow: FC<SearchTagWindowIProps> = ({ requireMessage, page, setT
       setTags(null)
       return;
     }
-    searchTagReq(title).then(
-      value => setTags(value.data),
-    )
-      .catch(value => setTags(null))
-  }, [title])
+    if (debouncedTitleTag) {
+      searchTagReq(title).then(
+        value => setTags(value.data),
+      )
+        .catch(value => setTags(null))
+    }
+  }, [debouncedTitleTag])
 
   useEffect(() => {
     if (setTag) {

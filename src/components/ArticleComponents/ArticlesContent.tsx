@@ -73,7 +73,7 @@ const ArticlesContent: FC<ArticlesContentProps> = ({ typeOfArticles, tagId }) =>
 
   return (
     <div ref={ref} className='articlesListContainer'>
-      <div className='contentWrapper'>
+      <div className='contentWrapper mainArticlesContainer'>
         <TypeArticleContext.Provider value={typeArticleContext}>
           <ArticlesContainer typeArticle={typeArticle} setCurrentPage={setCurrentPage}
             title={title} setTitle={setTitle} setLoading={setLoading}

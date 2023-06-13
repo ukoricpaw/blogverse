@@ -285,3 +285,70 @@
   padding: 20px;
   font-weight: 600;
 }
+
+@mixin searchWrapperMixin($border-radius-wrapper, $gap-wrapper, $gap-search-wrapper,
+  $border-radius, $searchWrapperPadding, $searchInpuFont, $searchIconSize) {
+  .inputWrapper {
+    border-radius: #{$border-radius-wrapper}px;
+    gap: #{$gap-wrapper}px;
+
+    .searchWrapper {
+      gap: #{$gap-search-wrapper}px;
+      border-top-left-radius: #{$border-radius}px;
+      border-bottom-left-radius: #{$border-radius}px;
+      padding: #{$searchWrapperPadding}px;
+    }
+
+
+
+    .searchInput {
+      font-size: #{$searchInpuFont}px;
+    }
+
+    .searchIcon {
+      width: #{$searchIconSize}px;
+      height: #{$searchIconSize}px;
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 319px) {
+  .changeTypeButton {
+    font-size: 18px;
+  }
+
+  .inputWrapper {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+
+  .tagsList, .tag {
+    display: none;
+  }
+
+
+  @include searchWrapperMixin(10, 5, 5, 10, 10, 10, 15)
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .changeTypeButton {
+    font-size: 20px;
+  }
+
+  .inputWrapper {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+
+
+  @include searchWrapperMixin(10, 5, 5, 10, 10, 10, 15)
+}
+
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  @include searchWrapperMixin(10, 5, 5, 10, 10, 10, 15)
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {}

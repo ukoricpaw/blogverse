@@ -37,9 +37,9 @@ const Navbar: FC = () => {
           <Link to={RouterPaths.REGISTRATION}><li className={styles.navItem}>Зарегистрироваться</li></Link>
         </ul> :
           <ul className={styles.navItems}>
-            {navShowItemsCondition && <Link to={`user/${data.id}`}><li className={styles.navItem}>Мой блог</li></Link>}
-            {navShowItemsCondition && <Link to={`user/${data.id}/favorites`}><li className={styles.navItem}>Избранное</li></Link>}
-            <li onClick={accountLogout} className={styles.navItem}>Выйти</li>
+            {navShowItemsCondition && <Link to={`user/${data.id}`}><li className={`${styles.navItem}`}>Мой блог</li></Link>}
+            {navShowItemsCondition && <Link to={`user/${data.id}/favorites`}><li className={`${styles.navItem} ${styles.favoriteItem}`}>Избранное</li></Link>}
+            <li onClick={accountLogout} className={`${styles.navItem} ${styles.exitItem}`}>Выйти</li>
             <Link to={`/user/${data.id}`}><UserItem width={40} height={40} data={data} /></Link>
           </ul>
         }

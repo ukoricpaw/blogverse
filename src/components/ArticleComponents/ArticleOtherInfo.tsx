@@ -41,7 +41,7 @@ const ArticleOtherInfo: FC<ArticleOtherInfoProps> = ({ currentArticle }) => {
       <div className={styles.articleAvatarContainer}>
         <Link to={`/user/${currentArticle.user.id}`}><img className={styles.articleAuthorIcon} src={imageCondition} alt="userProfile" title={currentArticle.user.username} />
         </Link>
-        <h2>Автор:</h2>
+        <h2 className={styles.authorTitle}>Автор:</h2>
         <p className={styles.articleAuthor}>{currentArticle.user.username}</p>
       </div>
       <div className={styles.countInfoContainer}>
