@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { Outlet } from 'react-router-dom'
 import styles from "../styles/User.module.scss"
 import UserPageNavigation from '../components/UserComponents/UserPageNavigation'
@@ -9,8 +9,8 @@ const UserPage: FC = () => {
 
   const location = useLocation();
   const { data } = useAppSelector(state => state.UserReducer)
-
   const path = location.pathname.split("/")
+
 
 
   return (

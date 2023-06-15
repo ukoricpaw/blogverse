@@ -1,12 +1,13 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState, useRef } from 'react'
 import styles from "../styles/User.module.scss"
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import UserItem from '../components/UserComponents/UserItem'
 import { UserStateData } from '../types/userTypes'
 import { fetchUser } from '../axios/http/fetchUser'
 import UserProfileInfo from '../components/UserComponents/UserProfileInfo'
 import { useAppSelector } from '../hooks/reduxHooks'
 import UserArticleContent from './UserArticleContent'
+import SingleArticleSkeleton from '../components/SkeletonComponents/SingleArticleSkeleton'
 
 const UserProfile: FC = () => {
   const { id } = useParams();
@@ -15,10 +16,16 @@ const UserProfile: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [err, setErr] = useState<null | string>(null);
   const { data } = useAppSelector(state => state.UserReducer)
-
+  const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (!id) {
       navigate("/")
+      return
+    }
+    if (ref.current) {
+      ref.current?.scrollIntoView({
+        behavior: "smooth"
+      })
     }
     (async () => {
       await fetchUser(Number(id)).then(
@@ -36,8 +43,12 @@ const UserProfile: FC = () => {
   }, [id])
 
 
+
   if (loading) {
-    return <div>Загрузка...</div>
+
+    return <section ref={ref}>
+      <SingleArticleSkeleton />
+    </section>
   }
 
   if (err) {

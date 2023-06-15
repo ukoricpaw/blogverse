@@ -36,16 +36,16 @@ const UserProfileInfo: FC<{ data: UserStateData }> = ({ data }) => {
         <h2 className={styles.userProfile__infoItem__title}>ID:</h2>
         <p className={styles.userProfile__infoItem__value}>{data.id}</p>
       </div>
-      |
+      <p className={styles.splitter}>|</p>
       <div className={styles.userProfile__infoItem}>
         <p className={styles.userProfile__infoItem__value}>{data.username}</p>
       </div>
-      |
+      <p className={styles.splitter}>|</p>
       <div className={styles.userProfile__infoItem}>
         <p className={styles.userProfile__infoItem__value}>{data.email}</p>
       </div>
       {data.id === userData.id && <>
-        |
+        <p className={styles.splitter}>|</p>
         <button onClick={setModalActiveHandler} className={styles.editUserButton}>
           Редактировать
         </button>

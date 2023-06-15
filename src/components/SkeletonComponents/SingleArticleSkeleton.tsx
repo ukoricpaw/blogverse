@@ -1,4 +1,4 @@
-import { ForwardRefRenderFunction, forwardRef, HTMLProps } from 'react'
+import { ForwardRefRenderFunction, forwardRef } from 'react'
 import styles from "../../styles/SingleArticle.module.scss"
 
 

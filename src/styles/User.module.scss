@@ -82,6 +82,7 @@
     color: var(--dark-color);
     font-size: 20px;
     font-weight: 600;
+    transition: all 0.3s
   }
 
   .userPage__navigation {
@@ -89,8 +90,14 @@
 
     background-color: var(--white-color);
 
+    .userPage__navigationItemActivated {
+      color: var(--main-blue);
+      background-color: rgb(241, 241, 241);
+    }
+
     .userPage__navigationItem:active {
       color: gray;
+      background-color: var(--lightgray-color);
     }
 
   }
@@ -253,6 +260,10 @@
   }
 }
 
+.addTagForm {
+  margin-left: 30px;
+}
+
 .articlesNotConfirmedList {
   width: 700px;
 }
@@ -297,4 +308,355 @@
       background-color: rgb(80, 79, 79);
     }
   }
+}
+
+@mixin UserNavigationMixin($displayProp, $navGap, $navFontSize, $itemPadding, $navPadding) {
+  .userPage__navigation {
+    flex-direction: #{$displayProp} !important;
+
+    .userPage__navigationItem {
+
+      padding: #{$itemPadding}px !important;
+      font-size: #{$navFontSize}px !important;
+    }
+
+    gap: #{$navGap}px !important;
+    padding: #{$navPadding}px !important
+  }
+
+}
+
+@mixin userProfileSectionMixin($flexDirection, $gapProfile, $paddingProfile, $paddingLeftInfo, $infoGap,
+  $editUserButtonPaddingY, $editUserButtonPaddingX, $editUserButtonBr,
+  $infoItemPadding, $fontSizeValue, $sizeOfAvatar) {
+
+
+  .userProfile {
+    .userImage {
+      width: #{$sizeOfAvatar}px !important;
+      height: #{$sizeOfAvatar}px !important;
+    }
+
+    gap: #{$gapProfile}px !important;
+    padding: #{$paddingProfile}px !important;
+
+    .userProfile__info {
+      flex-direction: #{$flexDirection};
+
+      h2 {
+        font-size: #{$fontSizeValue}px !important;
+      }
+
+      padding-left: #{$paddingLeftInfo}px !important;
+      gap:#{$infoGap}px !important;
+
+      .editUserButton {
+        font-size: #{$fontSizeValue}px !important;
+        padding: #{$editUserButtonPaddingY}px #{$editUserButtonPaddingX}px !important;
+        border-radius: #{$editUserButtonBr}px !important;
+      }
+
+      .userProfile__infoItem {
+        gap: #{$infoItemPadding}px !important;
+
+        .userProfile__infoItem__value {
+          font-size: #{$fontSizeValue}px !important;
+        }
+
+      }
+    }
+  }
+}
+
+@mixin modalUserProfileMixin($flexDirection, $paddingModal, $gapModal,
+  $userAvatarGap, $fontSizeAvatarTitle, $marginRightButton,
+  $paddingYButton, $paddingXButton,
+  $buttonBorderRadius, $othersPhotoPadding, $othersPhotoBr, $userImageSize) {
+  .userProfileModalWindow {
+    flex-direction: #{$flexDirection} !important;
+    padding: #{$paddingModal}px !important;
+    gap: #{$gapModal}px !important;
+
+    .userAvatar {
+      gap: #{$userAvatarGap}px !important;
+
+      .userImage {
+        width: #{$userImageSize}px !important;
+        height: #{$userImageSize}px !important;
+      }
+
+      .userAvatar__title {
+        font-size: #{$fontSizeAvatarTitle}px !important;
+      }
+
+      .changeImageContainer {
+
+
+        .changePhotoButton::before {
+          margin-right: #{$marginRightButton}px !important;
+          padding: #{$paddingYButton}px #{$paddingXButton}px !important;
+          border-radius: #{$buttonBorderRadius}px !important;
+        }
+
+        .changePhotoButton,
+        .removePhotoButton,
+        .addPhotoButton {
+          padding: #{$othersPhotoPadding}px !important;
+          border-radius: #{$othersPhotoBr}px !important;
+        }
+
+      }
+
+    }
+  }
+
+
+
+}
+
+
+
+
+@media screen and (max-width: 319px) {
+
+  .userImage {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .blogWrapper {
+    width: 100% !important;
+  }
+
+  .favoriteTitle,
+  .userBlogTitle {
+    font-size: 25px !important;
+  }
+
+  .favoriteTitle {
+    margin-top: 10px;
+  }
+
+  a:first-child>.userPage__navigationItem {
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+  }
+
+
+  a:last-child>.userPage__navigationItem {
+    border-bottom-left-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+  }
+
+  @include UserNavigationMixin(column, 0, 14, 16, 0);
+
+  .userPage {
+    width: 240px !important;
+    gap: 18px !important;
+  }
+
+  .splitter {
+    display: none;
+  }
+
+  .userProfile {
+    align-items: center;
+  }
+
+  .userProfile__info {
+    align-items: flex-start !important;
+  }
+
+  .editUserButton {
+    margin-top: 10px !important;
+  }
+
+  .changePasswordButton {
+    padding: 10px 0 !important;
+    border-radius: 8px;
+  }
+
+  .changeOtherInfo {
+    gap: 20px !important;
+  }
+
+  .articlesNotConfirmedList {
+    width: 240px !important;
+  }
+
+
+  .adminPageContainer {
+    flex-direction: column !important;
+
+    .tagsContainer {
+      order: 1 !important;
+    }
+
+
+    .articlesNotConfirmedTitle {
+      font-size: 24px !important;
+    }
+
+  }
+
+  .addTagForm {
+
+    .tagLabel {
+      font-size: 18px;
+      margin-top: 20px !important;
+      margin-bottom: 0 !important;
+    }
+
+    margin-left: 0 !important;
+    gap: 15px !important;
+  }
+
+
+  @include modalUserProfileMixin(column, 20, 20, 20,
+    20, 15, 15, 10, 15, 5, 10, 80);
+  @include userProfileSectionMixin(column, 15, 20, 10, 15, 6, 10, 50, 10, 11, 65);
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  .articlesNotConfirmedList {
+    width: 320px !important;
+  }
+
+  .changeOtherInfo {
+    gap: 20px !important;
+  }
+
+  .adminPageContainer {
+    flex-direction: column !important;
+
+    .articlesNotConfirmedTitle {
+      font-size: 24px !important;
+    }
+
+    .addTagForm {
+
+      .tagLabel {
+        font-size: 18px;
+        margin-top: 20px !important;
+        margin-bottom: 0 !important;
+      }
+
+      margin-left: 0 !important;
+      gap: 15px !important;
+    }
+
+    .tagsContainer {
+      order: 1 !important;
+    }
+  }
+
+  @include modalUserProfileMixin(column, 15, 20, 20, 24, 30, 10, 15,
+    15, 10, 10, 80);
+
+  .changePasswordButton {
+    padding: 10px 0 !important;
+    border-radius: 8px;
+  }
+
+  .userImage {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .favoriteTitle,
+  .userBlogTitle {
+    font-size: 30px !important;
+  }
+
+  .blogWrapper {
+    width: 100% !important;
+  }
+
+  .splitter {
+    display: none;
+  }
+
+  .userProfile {
+    align-items: center;
+  }
+
+  .editUserButton {
+    margin-top: 10px !important;
+  }
+
+
+  .userProfile__info {
+    align-items: flex-start !important;
+  }
+
+  @include UserNavigationMixin(column, 0, 14, 20, 0);
+
+  .userPage {
+    width: 320px !important;
+    gap: 18px !important;
+
+    a:first-child>.userPage__navigationItem {
+      border-top-left-radius: 15px !important;
+      border-top-right-radius: 15px !important;
+    }
+
+
+    a:last-child>.userPage__navigationItem {
+      border-bottom-left-radius: 15px !important;
+      border-bottom-right-radius: 15px !important;
+    }
+  }
+
+  .favoriteTitle {
+    margin-top: 15px;
+  }
+
+  @include userProfileSectionMixin(column, 30, 20, 20, 15, 6, 10, 50, 15, 12, 80);
+
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .blogWrapper {
+    width: 100% !important;
+
+    .inputWrapper,
+    .articlesList {
+      margin: 0 0px 50px !important;
+    }
+  }
+
+  @include userProfileSectionMixin(row, 15, 10, 10, 8, 6, 10, 50, 15, 12, 45);
+  @include UserNavigationMixin(row, 0, 12, 18, 0);
+  @include modalUserProfileMixin(column, 30, 20, 20, 24, 30, 10, 15,
+    15, 10, 10, 80);
+
+  .userPage {
+    width: 500px !important;
+    gap: 20px !important
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+  @include modalUserProfileMixin(row, 30, 20, 20, 24, 30, 10, 15,
+    15, 10, 10, 80);
+
+  .blogWrapper {
+    width: 100% !important;
+  }
+
+  @include UserNavigationMixin(row, 0, 16, 25, 0);
+
+  .userPage {
+    width: 780px !important;
+    gap: 20px !important
+  }
+
+  @include userProfileSectionMixin(row, 20, 20, 20, 15, 4, 18, 50, 15, 18, 50)
+}
+
+@media screen and (min-width: 1025px) {
+  @include UserNavigationMixin(row, 0, 20, 40, 0);
 }

@@ -111,7 +111,7 @@ const Login: FC = () => {
                 Есть аккаунт? <span onClick={NavigateTo} className={styles.changePageButton}>Войти</span>
               </p>
             }
-            <p className={styles.loginAnswer}>
+            <p style={{ color: "red" }} className={styles.loginAnswer}>
               {validationError || isError || ""}
             </p>
             <button ref={refButton} disabled={disableButton} onClick={(e) => loginUser(e)} className={`${styles.submitBtn}`}>{

@@ -52,7 +52,7 @@
 .skeletonArticleAnimContainer {
   opacity: .7;
   background-color: var(--main-blue);
-  height: 350 px;
+  height: 350px;
   animation: skeletonArticleAnim 1s linear infinite alternate;
 }
 
@@ -420,6 +420,11 @@
   @include wordEllipsis(50px);
 }
 
+.createdAt,
+.userInfo__username {
+  @include wordEllipsis(200px);
+}
+
 .paginationList {
   display: flex;
   flex-direction: row;
@@ -486,11 +491,10 @@
 
   .hiddenWindow {
     position: absolute;
-    left: 120px;
-    bottom: -15px;
-    background-color: rgb(218, 166, 166);
+    bottom: 40px;
+    right: -20px;
+    background-color: rgb(216, 134, 134);
     padding: 15px;
-    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -510,11 +514,13 @@
         padding: 10px 15px;
         color: white;
         border: none;
-        border-radius: 15px;
         cursor: pointer;
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+
       }
 
       .delete {
+
         background-color: rgb(145, 56, 56)
       }
 
@@ -594,9 +600,11 @@
   }
 }
 
-@mixin singleArticlePreview($height, $max-widthTitle, $font-sizeTitle, $font-sizeTag, $marginTopTag, $font-sizeFullArticle,
+@mixin singleArticlePreview($fullArticleGap, $height, $max-widthTitle, $font-sizeTitle, $font-sizeTag, $marginTopTag, $font-sizeFullArticle,
   $marginFullArticle, $imgBr, $imgHeight) {
-  .articleInfo {
+
+  .articleInfo,
+  .skeletonArticleAnimContainer {
     height: #{$height}px !important;
 
     .articleTitle {
@@ -613,12 +621,13 @@
 
   .articleContainer {
 
-    .fullArticle {
+    * {
       font-size: #{$font-sizeFullArticle}px !important;
     }
 
     .fullArticle {
       margin: #{$marginFullArticle}px !important;
+      gap: #{$fullArticleGap}px !important;
 
       img {
         border-radius: #{$imgBr}px !important;
@@ -726,33 +735,160 @@
   }
 }
 
+@mixin commentMixin($commentDeleteIconSize,
+  $textSize, $commentRateGap, $commentOtherInfoGap, $commentInfoPaddingY, $commentInfoPaddingX, $commentInfoGap, $wordEllipsis) {
+  .commentOtherInfo {
+    gap: #{$commentOtherInfoGap}px !important
+  }
+
+  .commentRate {
+    gap: #{$commentRateGap}px !important
+  }
+
+  .commentInfo {
+    padding: #{$commentInfoPaddingY}px #{$commentInfoPaddingX}px !important;
+    gap: #{$commentInfoGap}px !important;
+
+    .userInfo__username {
+      font-size: #{$textSize}px !important;
+      @include wordEllipsis(#{$wordEllipsis}px !important);
+    }
+
+    .commentDeleteIcon {
+      width: #{$commentDeleteIconSize}px !important;
+      height: #{$commentDeleteIconSize}px !important;
+    }
+
+    .createdAt,
+    .commentDelete {
+      font-size: #{$textSize}px !important;
+      @include wordEllipsis(#{$wordEllipsis}px !important);
+    }
+  }
+}
+
+@mixin commentSizeOfIcons($viewsGap, $commentIconSize, $rateGap, $max-widthCount, $count-font-size) {
+
+  .commentViews {
+    gap: #{$viewsGap}px !important
+  }
+
+  .commentLikesIcon,
+  .commentDislikesIcon,
+  .commentViewsIcon {
+    width: #{$commentIconSize}px !important;
+    height: #{$commentIconSize}px !important;
+  }
+
+  .commentLikesCount,
+  .commentDislikesCount,
+  .commentViewsCount {
+    font-size: #{$count-font-size}px !important;
+    max-width: #{$max-widthCount}px !important;
+  }
+
+  .commentLikesRate {
+    gap: #{$rateGap}px !important
+  }
+}
+
+@mixin deleteModals($font-sizeText, $paddingWindow,
+  $gapWindow, $gapMessageButtons, $paddingY, $paddingX) {
+  .hiddenWindow {
+    font-size: #{$font-sizeText}px !important;
+    padding: #{$paddingWindow}px !important;
+    gap: #{$gapWindow}px !important;
+
+
+    .deleteMessageBtns {
+      gap: #{$gapMessageButtons}px !important;
+
+      .delete,
+      .cancel {
+        font-size: #{$font-sizeText}px !important;
+        padding: #{$paddingY}px #{$paddingX}px !important;
+      }
+    }
+  }
+}
+
+
 
 
 @media screen and (max-width: 319px) {
+  .authorTitle {
+    display: none !important;
+  }
+
   @include paginationMixin(6, 5, 5, 10, 10, 10, 8, 10, 10);
-  @include singleArticlePreview(250, 200, 20, 12, 25, 24, 20, 10, 150);
-  @include articleOtherInfoMixin(8, 2, 2, 45, 12, 25, 8);
-  @include articleOtherIconsAndRateMixin(4, 2, 4, 12, 12, 12);
+  @include singleArticlePreview(10, 250, 200, 20, 12, 25, 10, 20, 10, 150);
+  @include articleOtherInfoMixin(8, 10, 2, 45, 12, 25, 8);
+  @include articleOtherIconsAndRateMixin(10, 8, 4, 12, 12, 12);
   @include addCommentSingleArticleMixin(10, 12, 10, 11, 12);
+  @include commentMixin(30, 12, 10, 10, 6, 15, 10, 60);
+
+  @include deleteModals(12, 8, 8, 8, 5, 8);
+
+  .commentViews {
+    display: none !important;
+  }
+
+  .userInfo__username {
+    display: none !important;
+  }
+
+  .commentDelete {
+    display: none
+  }
+
+  @include commentSizeOfIcons(5, 15, 10, 30, 15);
+
+  .commentDescription {
+    padding: 10px !important;
+    font-size: 14px !important;
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px) {
+  .authorTitle {
+    display: none !important;
+  }
+
   @include paginationMixin(6, 10, 8, 12, 10, 10, 10, 12, 10);
-  @include singleArticlePreview(280, 250, 24, 12, 25, 12, 20, 10, 200);
+  @include singleArticlePreview(15, 280, 250, 24, 12, 25, 12, 20, 10, 200);
   @include articleOtherInfoMixin(10, 10, 10, 45, 12, 30, 12);
-  @include articleOtherIconsAndRateMixin(10, 15, 4, 16, 15, 14);
+  @include articleOtherIconsAndRateMixin(15, 15, 4, 16, 15, 14);
   @include addCommentSingleArticleMixin(10, 14, 10, 11, 14);
+  @include commentMixin(30, 12, 15, 10, 6, 15, 10, 45);
+  @include commentSizeOfIcons(5, 15, 15, 30, 15);
+  @include deleteModals(12, 6, 8, 8, 5, 8);
+
+  .commentDelete {
+    display: none
+  }
+
+  .userInfo__username {
+    display: none !important;
+  }
+
+  .commentDescription {
+    padding: 10px !important;
+    font-size: 14px !important;
+  }
 }
 
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
   @include paginationMixin(6, 12, 10, 12, 10, 10, 12, 12, 10);
-  @include singleArticlePreview(300, 400, 30, 14, 30, 12, 20, 20, 300);
+  @include singleArticlePreview(20, 300, 400, 30, 14, 30, 12, 20, 20, 300);
   @include articleOtherInfoMixin(15, 30, 20, 65, 15, 30, 15);
   @include articleOtherIconsAndRateMixin(20, 15, 10, 20, 35, 16);
+  @include commentMixin(30, 12, 15, 15, 6, 15, 10, 60);
+  @include commentSizeOfIcons(10, 20, 15, 30, 15);
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   @include articleOtherInfoMixin(20, 40, 20, 150, 20, 40, 20);
   @include articleOtherIconsAndRateMixin(30, 20, 10, 30, 40, 20);
+  @include commentMixin(30, 17, 15, 20, 10, 15, 10, 200)
 }

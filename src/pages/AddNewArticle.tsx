@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, MouseEvent } from 'react'
+import { FC, useEffect, useState, MouseEvent, useRef } from 'react'
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from 'draft-js';
 import styles from "../styles/Article.module.scss"
@@ -27,6 +27,7 @@ const AddNewArticle: FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [disabledState, setDisabled] = useState<boolean>(true)
   const [loading, setLoading] = useState<boolean>(false);
+  const ref = useRef<HTMLFormElement>(null)
 
   const handleClickButton = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -46,6 +47,9 @@ const AddNewArticle: FC = () => {
   }
 
   useEffect(() => {
+    ref.current?.scrollIntoView({
+      behavior: "smooth"
+    })
     if (Number(id) !== data.id) {
       navigate(`/user/${id}`)
     }
@@ -67,7 +71,7 @@ const AddNewArticle: FC = () => {
   }, [titleState, tagId, editorState])
 
   return (
-    <form>
+    <form ref={ref}>
       <div className={styles.addArticleInfo}>
         <ArticleTitle articleTitle={titleState} setArticleTitle={setTitleState} />
         <SearchTagWindow page={"articleEdit"} setTag={setTagId} />
@@ -75,7 +79,7 @@ const AddNewArticle: FC = () => {
       </div>
       <p className={styles.articleTitleLabel}>Ваша статья</p>
       <Editor
-        editorStyle={{ width: "100%", background: "white", minHeight: "300px", padding: "10px 30px" }}
+        editorStyle={{ width: "100%", background: "white", minHeight: "600px", padding: "10px 30px" }}
         editorState={editorState} onEditorStateChange={setEditorState}
         toolbarClassName='toolbarClassName'
         wrapperClassName='wrapperClassName'

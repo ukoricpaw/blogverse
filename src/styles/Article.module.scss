@@ -152,7 +152,6 @@
     @extend %button;
     transition: all 0.5s;
     text-align: center;
-    width: 30%;
   }
 
 
@@ -183,7 +182,7 @@
 .inputWrapper {
   display: flex;
   align-items: center;
-  margin: 0 30px 50px 0;
+  margin: 0 0 50px 0;
   background-color: #F3F3F3;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
@@ -312,9 +311,38 @@
   }
 }
 
+@mixin newAricleInfoWrapperMixin($fontSizeLabel, $tagLabelSize,
+  $marginY, $titleInputPadding, $tagInputPadding) {
+  .articleLabel {
+    font-size: #{$fontSizeLabel}px !important;
+  }
+
+  .articleTitle {
+    margin: #{$marginY}px 0 !important;
+
+    .articleTitleInput {
+      margin-top: 10px;
+      padding: #{$titleInputPadding}px !important
+    }
+  }
+
+  .tagContainer {
+    .tagInput {
+      padding: #{$tagInputPadding}px !important
+    }
+
+    .chooseTag {
+      font-size: #{$tagLabelSize}px !important;
+    }
+  }
+}
+
 
 
 @media screen and (max-width: 319px) {
+
+  @include newAricleInfoWrapperMixin(24, 14, 15, 5, 5);
+
   .changeTypeButton {
     font-size: 18px;
   }
@@ -324,10 +352,39 @@
     margin-bottom: 30px;
   }
 
-  .tagsList, .tag {
+  .addArticleInfo {
+    width: 100%;
+  }
+
+  .tagsList,
+  .tag {
     display: none;
   }
 
+  .editArticleTitle {
+    font-size: 25px !important;
+  }
+
+
+  .buttonsPreview {
+    gap: 0 !important;
+
+    .articlePreviwInput::before {
+      padding: 5px 10px;
+      margin-right: 8px;
+    }
+
+
+    input {
+      width: 190px;
+      font-size: 12px;
+    }
+
+    .deleteImageButton {
+      font-size: 12px;
+      padding: 10px;
+    }
+  }
 
   @include searchWrapperMixin(10, 5, 5, 10, 10, 10, 15)
 }
@@ -337,9 +394,26 @@
     font-size: 20px;
   }
 
+  .addArticleInfo {
+    width: 100%;
+  }
+
   .inputWrapper {
     margin-right: 0;
     margin-bottom: 30px;
+  }
+
+  .buttonsPreview {
+    gap: 0 !important;
+
+    input {
+      width: 240px;
+    }
+
+    .deleteImageButton {
+      font-size: 12px;
+      padding: 12px;
+    }
   }
 
 
@@ -348,7 +422,9 @@
 
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  @include searchWrapperMixin(10, 5, 5, 10, 10, 10, 15)
-}
+  @include searchWrapperMixin(10, 5, 5, 10, 10, 10, 15);
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {}
+  .addArticleInfo {
+    width: 100%;
+  }
+}

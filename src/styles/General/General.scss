@@ -166,6 +166,15 @@ footer {
   .footerWrapper {
     width: 240px;
   }
+
+  .rdw-editor-main {
+    padding: 5px 8px !important;
+  }
+
+
+  .mainContainer {
+    margin-top: 20px !important;
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px) {
@@ -178,6 +187,25 @@ footer {
   .contentWrapper,
   .footerWrapper {
     width: 320px;
+  }
+
+  .mainContainer {
+    margin-top: 15px !important;
+  }
+
+  .rdw-editor-main {
+    padding: 5px 8px !important;
+  }
+
+
+  .rdw-option-wrapper {
+    padding: 3px !important;
+    margin: 0 2px !important;
+
+    img {
+      width: 12px !important;
+      height: 12px !important
+    }
   }
 
   @include footerMixin(40, 14);
@@ -198,5 +226,22 @@ footer {
   .contentWrapper,
   .footerWrapper {
     width: 780px;
+  }
+}
+
+// for Editor;
+
+.wrapperClassName {
+  position: relative;
+
+  .rdw-fontfamily-wrapper {
+    display: none !important;
+  }
+
+  .rdw-editor-toolbar,
+  .toolbarClassName {
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 }
