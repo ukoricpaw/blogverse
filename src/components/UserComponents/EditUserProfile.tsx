@@ -29,8 +29,8 @@ const EditUserProfile: FC<EditUserProfileIProps> = ({ setUsername, handleFileCha
         <p className={styles.userAvatar__title}>Ваше фото:</p>
         {(!image && !deleteImg) && <UserItem width={100} height={100} data={userData} />}
         <div className={styles.changeImageContainer}>
-          <input type='file' onChange={(e) => handleFileChange(e)} accept='image/jpeg, image/png, image/gif' className={styles.changePhotoButton} />
-          {(userData.fileName && !image && !deleteImg) && <button onClick={(e) => deleteImgHandler(e)} className={styles.removePhotoButton}>Удалить фото</button>}
+          <input type='file' onChange={handleFileChange} accept='image/jpeg, image/png, image/gif' className={styles.changePhotoButton} />
+          {(userData.fileName && !image && !deleteImg) && <button onClick={deleteImgHandler} className={styles.removePhotoButton}>Удалить фото</button>}
         </div>
       </div>
       <div className={styles.changeOtherInfo}>
@@ -43,8 +43,8 @@ const EditUserProfile: FC<EditUserProfileIProps> = ({ setUsername, handleFileCha
         {(error || editProfileResponse) && <p>{error || editProfileResponse}</p>}
         <button onClick={() => setPasswordWindow(true)} className={styles.changePasswordButton}>Изменить пароль</button>
         <div className={styles.submitButtons}>
-          <button onClick={(e) => changeOtherInfoHandler(e)} disabled={disabledButton} className={styles.submit}>Сохранить</button>
-          <button onClick={(e) => hideModalHandler(e)} className={styles.cancel}>Отмена</button>
+          <button onClick={changeOtherInfoHandler} disabled={disabledButton} className={styles.submit}>Сохранить</button>
+          <button onClick={hideModalHandler} className={styles.cancel}>Отмена</button>
         </div>
       </div>
     </>

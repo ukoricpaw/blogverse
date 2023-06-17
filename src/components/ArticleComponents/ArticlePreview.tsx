@@ -37,7 +37,7 @@ const ArticlePreview: FC<ArticleTitleProps> = ({ setArticlePreview, articleImage
         <div className={styles.buttonsPreview}>
           <div className={styles.articlePreviewWrapper}>
             <label htmlFor='avatar' className={styles.articlePreviwTitle} />
-            <input onChange={(event) => handleFileChange(event)} className={styles.articlePreviwInput} type="file"
+            <input onChange={handleFileChange} className={styles.articlePreviwInput} type="file"
               id="avatar" name="avatar"
               accept="image/png, image/jpeg" />
           </div>
@@ -47,7 +47,7 @@ const ArticlePreview: FC<ArticleTitleProps> = ({ setArticlePreview, articleImage
         :
         <div className={styles.articlePreviewWrapper}>
           <label htmlFor='avatar' className={styles.articlePreviwTitle} />
-          <input onChange={(event) => handleFileChange(event)} className={styles.articlePreviwInput} type="file"
+          <input onChange={handleFileChange} className={styles.articlePreviwInput} type="file"
             id="avatar" name="avatar"
             accept="image/png, image/jpeg" />
         </div>}

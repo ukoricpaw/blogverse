@@ -91,13 +91,13 @@ const Login: FC = () => {
           {LOGIN ? loginInputs.map(formItem => {
             return <div key={formItem.id} className={styles.formItem}>
               <label className={styles.formLabel} htmlFor={formItem.id}>{formItem.title}</label>
-              <input value={formState[formItem.id]} onChange={(e) => changeDynamicField(e)} className={styles.formInput} type={formItem.type} id={formItem.id} placeholder={formItem.placeholder} />
+              <input value={formState[formItem.id]} onChange={changeDynamicField} className={styles.formInput} type={formItem.type} id={formItem.id} placeholder={formItem.placeholder} />
             </div>
           })
             : registrationInputs.map(formItem => {
               return <div key={formItem.id} className={styles.formItem}>
                 <label className={styles.formLabel} htmlFor={formItem.id}>{formItem.title}</label>
-                <input value={formState[formItem.id]} onChange={(e) => changeDynamicField(e)} className={styles.formInput} type={formItem.type} id={formItem.id} placeholder={formItem.placeholder} />
+                <input value={formState[formItem.id]} onChange={changeDynamicField} className={styles.formInput} type={formItem.type} id={formItem.id} placeholder={formItem.placeholder} />
               </div>
             })
           }
@@ -114,7 +114,7 @@ const Login: FC = () => {
             <p style={{ color: "red" }} className={styles.loginAnswer}>
               {validationError || isError || ""}
             </p>
-            <button ref={refButton} disabled={disableButton} onClick={(e) => loginUser(e)} className={`${styles.submitBtn}`}>{
+            <button ref={refButton} disabled={disableButton} onClick={loginUser} className={`${styles.submitBtn}`}>{
               LOGIN ? "Войти" : "Зарегистрироваться"
             }</button>
           </div>

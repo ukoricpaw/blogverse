@@ -48,7 +48,7 @@ const SearchArticle: FC<SearchArticleProps> = ({ setTitle, title, setLoading, us
 
   return (
     <div className={styles.inputWrapper}>
-      <button disabled={disabledState} onClick={(e) => searchByTitle(e)} className={styles.searchWrapper}>
+      <button disabled={disabledState} onClick={searchByTitle} className={styles.searchWrapper}>
         <p>Найти</p>
         <img className={styles.searchIcon} src={searchIcon} alt="searchIcon" />
       </button>
